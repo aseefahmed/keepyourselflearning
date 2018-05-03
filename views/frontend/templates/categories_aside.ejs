@@ -1,0 +1,10 @@
+<div class="widget">
+	<div class="widget-title">
+		<h4>Blog Categories</h4>
+	</div>
+	<ul class="cats">
+		<% categories.forEach(function(category){ %>
+			<li><a href="/blog/category/<%= category.name %>"><%= category.name.toUpperCase() %> <span>(12)</span></a></li>
+		<% }) %>
+	</ul>
+</div>

@@ -1,0 +1,58 @@
+<% include templates/head.ejs %>
+
+<body class="fixed-nav sticky-footer" id="page-top">
+  <!-- Navigation-->
+  <% include templates/navigation.ejs %>
+  <!-- /Navigation-->
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <% include templates/breadcrumbs.ejs %>
+		<!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header text-right">
+          <a href="/category/add" class="btn_1 medium">Add New Category</a>
+      </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Category</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>#</th>
+                  <th>Category</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <% categories.forEach(function(category, index){ %>
+                	<tr>
+	                  <td><%= index+1 %></td>
+	                  <td><%= category.name %></td>
+	                  <td class="text-center">
+	                      <a href="/post/edit/<%= category._id %>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+	                      <a href="#" class="delete_post_btn btn btn-danger" post_id="<%= category._id %>"><i class="fa fa-trash"></i></a>
+	                  </td>
+	                </tr>			
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+	  <!-- /tables-->
+	  </div>
+	  <!-- /container-fluid-->
+   	</div>
+    <!-- /container-wrapper-->
+    <% include templates/footers.ejs %>
+	
+</body>
+</html>

@@ -1,0 +1,188 @@
+<% include templates/head.ejs %>
+
+<body>
+	
+	<% include templates/main_menu.ejs %>
+	<!-- /main_menu -->
+	
+	<main>
+		<section id="hero_in" class="general">
+			<div class="wrapper">
+				<div class="container">
+					<h1 class="fadeInUp"><span></span>Blog</h1>
+				</div>
+			</div>
+		</section>
+		<!--/hero_in-->
+
+		<div class="container margin_60_35">
+			<div class="row">
+
+				<div class="col-lg-9">
+					<% include templates/breadcrumbs.ejs %>
+					<div class="bloglist singlepost">
+						<p><img width="100%" alt="" class="img-fluid" src="/img/uploads/<%- details[0].image %>"></p>
+						<h1><%= details[0].title %></h1>
+						<div class="postmeta">
+							<ul>
+								<li><a href="#"><i class="icon_folder-alt" style="color:rgb(23,144,233);"></i> <%- details[0].category %></a></li>
+								<li><a href="#"><i class="icon_clock_alt" style="color:rgb(23,144,233);"></i> <%= new Date(details[0].created_at).toDateString() %></a></li>
+								<li><a href="#"><i class="icon_pencil-edit" style="color:rgb(23,144,233);"></i> <%= details[0].created_by %></a></li>
+								<li><a href="#"><i class="icon_comment_alt" style="color:rgb(23,144,233);"></i> (14) Comments</a></li>
+							</ul>
+						</div>
+						<!-- /post meta -->
+						<div class="post-content">
+							<div class="dropcaps">
+								<p><%- details[0].description %></p>
+
+								<span style="font-weight:bold;">Tag(s): </span> 
+								<% if(details[0].tags.length == 1) { %>
+									<% if(details[0].tags[0] == "") { %>
+										<span style="font-weight:bold;color:purple;">Not Tagged</span>
+									<% }else { %>
+											<a href="/blog/tag/<%= details[0].tags[0] %>" style="font-weight:bold;color:purple;"><%= details[0].tags[0].toUpperCase() %></a>
+									<% } %>
+								<% }else{ %>
+									<% details[0].tags.forEach(function(tag, key){ %>
+											<a href="/blog/tag/<%= tag %>" style="font-weight:bold;color:purple;"><%= tag.toUpperCase() %></a>
+											<% if(key != (details[0].tags.length-1)) { %>
+													/
+											<% } %>
+									<% }) %>
+								<% } %>
+							</div>
+						</div>
+						<!-- /post -->
+					</div>
+					<!-- /single-post -->
+					
+					<div id="comments">
+						<h5 id="comment_div" <% if(typeof details[0].comments == 'undefined'){ %> style="display:none"; <%}%>>Comments</h5>
+						<% if(typeof details[0].comments != 'undefined'){ %>
+						<ul id="comment_area_div">
+							<% details[0].comments.forEach(function(comment){ %>
+							<li>
+								<div class="avatar">
+									<a href="#"><img src="/img/profile.jpg" alt="">
+									</a>
+								</div>
+								<div class="comment_right clearfix">
+									<div class="comment_info">
+										By <a target="_blank" href="http://<%= comment.website %>"><%= comment.name %></a><span>|</span><%= new Date(comment.date).toDateString() %>
+									</div>
+									<p>
+										<%= comment.message %>
+									</p>
+								</div>
+								<!-- <ul class="replied-to">
+									<li>
+										<div class="avatar">
+											<a href="#"><img src="img/avatar2.jpg" alt="">
+											</a>
+										</div>
+										<div class="comment_right clearfix">
+											<div class="comment_info">
+												By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
+											</div>
+											<p>
+												Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
+											</p>
+											<p>
+												Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
+											</p>
+										</div>
+										<ul class="replied-to">
+											<li>
+												<div class="avatar">
+													<a href="#"><img src="img/avatar2.jpg" alt="">
+													</a>
+												</div>
+												<div class="comment_right clearfix">
+													<div class="comment_info">
+														By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
+													</div>
+													<p>
+														Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
+													</p>
+													<p>
+														Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
+													</p>
+												</div>
+											</li>
+										</ul>
+									</li>
+								</ul> -->
+							</li>
+							<% }) %>
+							
+						</ul>
+
+						<% } %>
+					</div>
+					<hr>
+
+					<h5>Leave a Comment</h5>
+					<form method="post" action="/comment/submit">
+						<input type="hidden" name="post_id" id="post_id" value="<%= details[0]._id %>">
+						<div class="form-group">
+							<input type="text" name="name" id="name" class="form-control" placeholder="Name">
+						</div>
+						<div class="form-group">
+							<input type="text" name="email" id="email" class="form-control" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<input type="text" name="website" id="website" class="form-control" placeholder="Website">
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" name="msg" id="msg" rows="6" placeholder="Message Below"></textarea>
+						</div>
+						<div class="form-group">
+							<input type="button"  class="btn_1 rounded add_bottom_30" value="Submit" id="submit_comment_btn" />
+						</div>
+					</form>
+				</div>
+				<!-- /col -->
+
+				<aside class="col-lg-3">
+					<div class="widget">
+						<form>
+							<div class="form-group">
+								<input type="text" name="search" id="search" class="form-control" placeholder="Search...">
+							</div>
+							<button type="submit" id="submit" class="btn_1 rounded"> Search</button>
+						</form>
+					</div>
+					<!-- /widget -->
+					<% include templates/recent_posts.ejs %>
+					<!-- /widget -->
+					<% include templates/categories_aside.ejs %>
+					
+					<!-- /widget -->
+					<div class="widget">
+						<div class="widget-title">
+							<h4>Popular Tags</h4>
+						</div>
+						<div class="tags">
+							<a href="#">Information tecnology</a>
+							<a href="#">Students</a>
+							<a href="#">Community</a>
+							<a href="#">Carreers</a>
+							<a href="#">Literature</a>
+							<a href="#">Seminars</a>
+						</div>
+					</div>
+					<!-- /widget -->
+				</aside>
+				<!-- /aside -->
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</main>
+	<!--/main-->
+	
+	<% include templates/footer.ejs %>
+
+</body>
+</html>

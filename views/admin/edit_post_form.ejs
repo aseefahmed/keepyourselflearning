@@ -1,0 +1,104 @@
+<% include templates/head.ejs %>
+
+<body class="fixed-nav sticky-footer" id="page-top">
+  <!-- Navigation-->
+  <% include templates/navigation.ejs %>
+  <!-- /Navigation-->
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <% include templates/breadcrumbs.ejs %>
+        <form method="POST" action="/post/update" enctype="multipart/form-data">
+        	<input type="hidden" name="post_id" value="<%= post[0]._id %>">
+        	<input type="hidden" name="created_by" value="">
+        	<div class="row">
+				<div class="col-md-8">
+					<div class="box_general padding_bottom">
+						<div class="header_box version_2">
+							<h2><i class="fa fa-file"></i>Basic info</h2>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Title</label>
+									<input type="text" class="form-control" placeholder="Title" name="title" value="<%= post[0].title %>">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Category</label>
+									<select name="category[]" multiple class="selectjs">
+										<% options.forEach(function(option){ %>
+												<option <% if(post[0].category.indexOf(option.name) != -1){%> selected <%}%> value="<%= option.name %>"><%= option.name.toUpperCase() %></option>
+										<% }) %>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Short Description <a href="#0" data-toggle="tooltip" data-placement="top" title="Maximum 300 character allowed."><i class="fa fa-fw fa-question-circle"></i></a></label>
+									<textarea class="form-control" placeholder="Description" style="height: 100px;" name="short_description" id="short_description"><%= post[0].short_description %></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /box_general-->
+					
+					<div class="box_general padding_bottom">
+						<div class="header_box version_2">
+							<h2><i class="fa fa-file-text"></i>Description</h2>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Article Details</label>
+									<textarea rows="5" class="form-control" style="height:100px;" id="editor" placeholder="Description" name="description"><%= post[0].description %></textarea>
+								</div>
+							</div>
+						</div>
+						<!-- /row-->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Tag(s) <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label>
+									<input type="text" class="input_tags" placeholder="Ex: Science, Biology..." name="input_tags[]" value="<%= post[0].tags %>">
+								</div>
+							</div>
+						</div>
+						<!-- /row-->
+					</div>
+					<!-- /box_general-->
+					<p><input type="submit" class="btn_1 medium" value="Save"></p>
+				</div>
+				<div class="col-md-4">
+					<div class="box_general padding_bottom">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<img width="100%" src="/img/uploads/<%= post[0].image %>" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box_general padding_bottom">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Featured Image <a href="#0" data-toggle="tooltip" data-placement="top" title="Upload relavant image for this article."><i class="fa fa-fw fa-question-circle"></i></a></label>
+									<input type="file" class="form-control" placeholder="Ex: Science, Biology..." name="post_file" id="post_file">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>	
+	  </div>
+	  <!-- /.container-fluid-->
+   	</div>
+    <!-- /.container-wrapper-->
+    <% include templates/footers.ejs %>
+	
+</body>
+</html>

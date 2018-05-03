@@ -1,0 +1,11 @@
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+	  <a href="/dashboard">Dashboard</a>
+	</li>
+	<% if(typeof parentPageName !== 'undefined') { %>
+	<li class="breadcrumb-item">
+	  <a href="<%= parentPageRoute %>"><%= parentPageName %></a>
+	</li>
+	<% } %>
+	<li class="breadcrumb-item active"><%= pageName %></li>
+</ol>
