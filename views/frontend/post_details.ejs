@@ -69,7 +69,7 @@
 								</div>
 								<div class="comment_right clearfix">
 									<div class="comment_info">
-										By <a target="_blank" href="http://<%= comment.website %>"><%= comment.name %></a><span>|</span><%= new Date(comment.date).toDateString() %>
+										By <a target="_blank" href="http://<%= comment.website %>"><%= comment.name.toUpperCase() %></a><span>|</span><%= new Date(comment.date).toDateString() %>
 									</div>
 									<p>
 										<%= comment.message %>
@@ -126,16 +126,20 @@
 					<form method="post" action="/comment/submit">
 						<input type="hidden" name="post_id" id="post_id" value="<%= details[0]._id %>">
 						<div class="form-group">
-							<input type="text" name="name" id="name" class="form-control" placeholder="Name">
+							<input type="text" name="name" id="name" class="form-control comment_input" placeholder="Name">
+							<span id="name-err" style="color:red; display:none;" class='comment_form_input'>This filed is required</span>
 						</div>
 						<div class="form-group">
-							<input type="text" name="email" id="email" class="form-control" placeholder="Email">
+							<input type="text" name="email" id="email" class="form-control comment_input" placeholder="Email">
+							<span id="email-err" style="color:red; display:none;" class='comment_form_input'>This filed is required</span>
 						</div>
 						<div class="form-group">
-							<input type="text" name="website" id="website" class="form-control" placeholder="Website">
+							<input type="text" name="website" id="website" class="form-control comment_input" placeholder="Website">
+							<span id="website-err" style="color:red; display:none;" class='comment_form_input'>This filed is required</span>
 						</div>
 						<div class="form-group">
-							<textarea class="form-control" name="msg" id="msg" rows="6" placeholder="Message Below"></textarea>
+							<textarea class="form-control comment_input" name="msg" id="msg" rows="6" placeholder="Message Below"></textarea>
+							<span id="msg-err" style="color:red; display:none;" class='comment_form_input'>This filed is required</span>
 						</div>
 						<div class="form-group">
 							<input type="button"  class="btn_1 rounded add_bottom_30" value="Submit" id="submit_comment_btn" />

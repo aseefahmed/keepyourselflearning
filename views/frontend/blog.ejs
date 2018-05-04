@@ -45,7 +45,7 @@
 											<li>
 												<div class="thumb"><img src="/img/uploads/<%= post.image %>" alt=""></div> <%= post.created_by %>
 											</li>
-											<li><i class="icon_comment_alt"></i> 20</li>
+											<li><i class="icon_comment_alt"></i> <% if(typeof post.comments == 'undefined'){%>0<% }else{%><%= post.comments.length %><% } %></li>
 										</ul>
 									</div>
 								</div>

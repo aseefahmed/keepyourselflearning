@@ -100,6 +100,35 @@
 	<script>
 		$(function(){
 			$('#submit_comment_btn').click(function(e){
+				if($('#name').val() == ""){
+					$('#name-err').css('display', 'inline');
+					$('#email-err').css('display', 'none');
+					$('#website-err').css('display', 'none');
+					$('#msg-err').css('display', 'none');
+					return false;
+				}
+				if($('#email').val() == ""){
+					$('#name-err').css('display', 'none');
+					$('#email-err').css('display', 'inline');
+					$('#website-err').css('display', 'none');
+					$('#msg-err').css('display', 'none');
+					return false;
+				}
+				if($('#website').val() == ""){
+					$('#name-err').css('display', 'none');
+					$('#email-err').css('display', 'none');
+					$('#website-err').css('display', 'inline');
+					$('#msg-err').css('display', 'none');
+					return false;
+				}
+				if($('#msg').val() == ""){
+					$('#name-err').css('display', 'none');
+					$('#email-err').css('display', 'none');
+					$('#website-err').css('display', 'none');
+					$('#msg-err').css('display', 'inline');
+					return false;
+				}
+
 				e.preventDefault();
 				 var data = {
 					post_id: $('#post_id').val(),
@@ -108,6 +137,10 @@
 					website: $('#website').val(),
 					msg: $('#msg').val(),
 				};
+
+				$('.comment_form_input').css('display', 'none');
+				$('.comment_input').val('');
+
 				$.post('/comment/submit', data, function(data){
 					$('#comment_div').css('display', 'block');
 					 var str = "         <li>";
@@ -117,7 +150,7 @@
 					 str +=	"			</div>";
 					 str +=	"			<div class='comment_right clearfix'>";
 					 str +=	"				<div class='comment_info'>";
-					 str +=	"					By <a target='_blank' href='http://"+data.website+"'>"+data.name+"</a><span>|</span>"+new Date().toDateString()+"";
+					 str +=	"					By <a target='_blank' href='http://"+data.website+"'>"+data.name.toUpperCase()+"</a><span>|</span>"+new Date().toDateString()+"";
 					 str +=	"				</div>";
 					 str +=	"				<p>";
 					 str +=	"					"+data.msg;
