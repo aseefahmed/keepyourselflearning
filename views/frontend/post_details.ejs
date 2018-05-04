@@ -35,7 +35,7 @@
 						<div class="post-content">
 							<div class="dropcaps">
 								<p><%- details[0].description %></p>
-
+								<hr />
 								<span style="font-weight:bold;">Tag(s): </span> 
 								<% if(details[0].tags.length == 1) { %>
 									<% if(details[0].tags[0] == "") { %>
@@ -51,6 +51,8 @@
 											<% } %>
 									<% }) %>
 								<% } %>
+								
+								<hr />
 							</div>
 						</div>
 						<!-- /post -->

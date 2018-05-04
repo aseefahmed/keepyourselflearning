@@ -19,14 +19,14 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Title</label>
-									<input type="text" class="form-control" placeholder="Title" name="title">
+									<label>Title <span style="font-weight:bold" class="text-danger">*</span></label>
+									<input type="text" class="form-control" placeholder="Title" name="title" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Category</label>
-									<select name="category[]" multiple class="selectjs">
+									<label>Category <span style="font-weight:bold" class="text-danger">*</span></label>
+									<select name="category[]" multiple class="selectjs" required>
 										<% options.forEach(function(option){ %>
 												<option value="<%= option.name %>"><%= option.name.toUpperCase() %></option>
 										<% }) %>
@@ -36,8 +36,8 @@
 
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Short Description <a href="#0" data-toggle="tooltip" data-placement="top" title="Maximum 300 character allowed."><i class="fa fa-fw fa-question-circle"></i></a></label>
-									<textarea class="form-control" placeholder="Description" style="height: 100px;" name="short_description" id="short_description"></textarea>
+									<label>Short Description <span style="font-weight:bold" class="text-danger">*</span> <a href="#0" data-toggle="tooltip" data-placement="top" title="Maximum 300 character allowed."><i class="fa fa-fw fa-question-circle"></i></a></label>
+									<textarea required class="form-control" placeholder="Description" style="height: 100px;" name="short_description" id="short_description"></textarea>
 								</div>
 							</div>
 						</div>
@@ -52,7 +52,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Article Details</label>
-									<textarea rows="5" class="form-control" style="height:100px;" id="editor" placeholder="Description" name="description"></textarea>
+									<textarea required rows="5" class="form-control" style="height:100px;" id="editor" placeholder="Description" name="description"></textarea>
 								</div>
 							</div>
 						</div>

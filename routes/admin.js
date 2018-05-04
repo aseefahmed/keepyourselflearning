@@ -8,7 +8,19 @@ var upload = multer({ dest: './public/img/uploads' })
 router.use(flash());
 
 router.get('/dashboard', ensureAuthenticated, function(req, res, next) {
-  res.render('admin/dashboard', { pageName: 'Home' });
+  let posts = db.get('posts');
+  let total_posts = posts.count({},{}, function(err,count_posts){
+
+	  let categories = db.get('categories');
+	  categories.count({},{},function(err,cout_categories){
+	  	res.render('admin/dashboard', { 
+		  	pageName: 'Home',
+		  	totalPost: count_posts ,
+		  	totalCategories: cout_categories
+		  });
+	  })
+  });
+  
 });
 
 function ensureAuthenticated(req, res, next){
