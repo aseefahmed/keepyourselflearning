@@ -139,7 +139,7 @@ router.get('/post/get/:id', function(req, res){
 				let popular_posts = db.get('posts');
 				popular_posts.find({},{limit: 3, sort: {no_of_views: -1}},function(err, pop_posts){
 					let data = {
-							pageName: 'Details', 
+							pageName: 'Blog Details', 
 							parentPageName: 'Blog', 
 							ParentPageRoute: '/blog', 
 							details: post, 
