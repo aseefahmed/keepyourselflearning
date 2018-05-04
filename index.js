@@ -17,7 +17,7 @@ app.locals.moment = require('moment');
 
 var db = require('monk')('localhost/lms');
 
-const port = 10007;
+const port = 80;
 app.use(require('./routes/fronts'));
 app.use(require('./routes/admin'));
 app.use(require('./routes/chatio'));

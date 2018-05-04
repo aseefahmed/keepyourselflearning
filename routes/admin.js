@@ -49,7 +49,7 @@ router.get('/post/add', function(req, res){
 		let data = { pageName: 'New Post', options: categories };
 		res.render('admin/new_post_form', data);
 	});
-	let data = { pageName: 'New Post', session: req.session.passport.user };
+	///let data = { pageName: 'New Post', session: req.session.passport.user };
 	
 });
 
