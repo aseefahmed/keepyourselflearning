@@ -53,13 +53,39 @@ router.get('/post/add', function(req, res){
 	
 });
 
+router.post('/comment/delete', function(req, res){
+		
+		let post = db.get('posts');
+		post.update(
+		  { _id: req.body.post_id },
+		  { $pull: { comments: { id: req.body.deletable_comment_id } } },
+		  { multi: true }
+		);
+		res.redirect('/post/edit/'+req.body.post_id);
+
+		/*post.find({_id: req.body.post_id},{}, function(err, data){
+			let new_data = data
+			new_data.splice(req.body.deletable_post_id,1);
+			
+		})*/
+
+		
+});
+
 router.get('/post/edit/:id', function(req, res){
 	let posts = db.get('posts');
 	posts.find({_id: req.params.id}, {},function(err, post){
 		let categories = db.get('categories');
 		categories.find({},{}, function(err, categories){
 			posts.find({_id: req.params.id}, {}, function(err, post){
-				let data = { pageName: 'Edit Details', parentPageName: 'Posts', parentPageRoute: '/posts', options: categories, post: post };
+				let data = { 
+							pageName: 'Edit Details', 
+							parentPageName: 'Posts', 
+							parentPageRoute: '/posts', 
+							options: categories, 
+							comments: post[0].comments,
+							post: post 
+						};
 				res.render('admin/edit_post_form', data);
 			})
 		});

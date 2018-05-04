@@ -161,5 +161,11 @@
           $('#deletable_post_id').val(post_id);
           $('#delete_post_modal').modal('show');
         });
+
+
+        $('.delete_comment_btn').click(function(e){
+          $('#deletable_comment_id').val($(this).attr('comment_id_'));
+          $('#delete_comment_modal').modal('show');
+        })
       });
     </script>

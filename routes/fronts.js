@@ -55,12 +55,14 @@ router.get('/blog', function(req, res){
 	
 });
 
-router.post('/comment/submit', function(req, res){res.send(req.body)
+router.post('/comment/submit', function(req, res){
 	var posts = db.get('posts');
 	//posts.update({_id: req.body.post_id}, {$addToSet: {comments: {$each: [req.body.msg]}}});
+	let comment_id = Math.random().toString(36).substr(2, 9);
+
 	posts.update(
 				 { _id: req.body.post_id },
-				 { $addToSet: { comments: { $each: [ {name: req.body.name, email: req.body.email, website: req.body.website, message: req.body.msg, date: new Date()} ] } } }
+				 { $addToSet: { comments: { $each: [ {id: comment_id, name: req.body.name, email: req.body.email, website: req.body.website, message: req.body.msg, date: new Date()} ] } } }
 				);
 	res.send(req.body)
 });
@@ -139,7 +141,7 @@ router.get('/post/get/:id', function(req, res){
 				let popular_posts = db.get('posts');
 				popular_posts.find({},{limit: 3, sort: {no_of_views: -1}},function(err, pop_posts){
 					let data = {
-							pageName: 'Blog Details', 
+							pageName: 'Details', 
 							parentPageName: 'Blog', 
 							ParentPageRoute: '/blog', 
 							details: post, 
