@@ -40,7 +40,9 @@ router.get('/posts', function(req, res){
 	let posts = db.get('posts');
 	
 	posts.find({}, {}, function(err, posts){
-		let data = { pageName: 'Posts', posts: posts }
+		let data = { 
+				pageName: 'Posts',  
+				posts: posts }
 		res.render('admin/posts', data);
 	});
 	
@@ -58,7 +60,11 @@ router.get('/categories', function(req, res){
 router.get('/post/add', function(req, res){
 	let categories = db.get('categories');
 	categories.find({},{}, function(err, categories){
-		let data = { pageName: 'New Post', options: categories };
+		let data = { 
+			pageName: 'New Post', 
+				parentPageName: 'Posts', 
+				parentPageRoute: '/posts',
+			options: categories };
 		res.render('admin/new_post_form', data);
 	});
 	///let data = { pageName: 'New Post', session: req.session.passport.user };
@@ -178,7 +184,7 @@ router.post('/post/update', upload.single('post_file'), function(req, res){
 		res.redirect('/post/edit/'+req.body.post_id)
 	}
 	
-})
+});
 
 router.post('/post/submit', upload.single('post_file'), function(req, res){
 	tags = req.body.input_tags[0].toLowerCase();

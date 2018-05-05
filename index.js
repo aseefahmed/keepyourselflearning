@@ -21,6 +21,7 @@ const port = 80;
 app.use(require('./routes/fronts'));
 app.use(require('./routes/admin'));
 app.use(require('./routes/chatio'));
+app.use(require('./routes/courses'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));

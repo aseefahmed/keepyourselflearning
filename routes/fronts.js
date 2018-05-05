@@ -55,6 +55,37 @@ router.get('/blog', function(req, res){
 	
 });
 
+router.get('/search', function(req, res){
+	let keyword =req.query.search;
+	var pattern = '/'+keyword+'/';
+	let posts = db.get('posts');
+	//db.testlogwiki.find( { line_text: { $regex: result[, $options: 'i'] } } );
+
+	posts.find({description: {$regex:pattern}}, {sort: {created_at: -1}}, function(err, posts){
+		let recent_posts = db.get('posts');
+		recent_posts.find({},{limit: 3, sort: {created_at: -1}}, function(err, recents){
+
+			let categories = db.get('categories');
+			categories.find({}, {}, function(err, categories){
+				let popular_posts = db.get('posts');
+				popular_posts.find({},{limit: 3, sort: {no_of_views: -1}},function(err, pop_posts){
+					let data = {
+							pageName: 'Blog', 
+							posts: posts, 
+							recents: recents,
+							recents: recents,
+							popular_posts: pop_posts,
+							categories: categories
+						};
+					res.render('frontend/blog', data);
+				});
+			})
+
+
+		})
+		
+	})
+})
 router.post('/comment/submit', function(req, res){
 	var posts = db.get('posts');
 	//posts.update({_id: req.body.post_id}, {$addToSet: {comments: {$each: [req.body.msg]}}});

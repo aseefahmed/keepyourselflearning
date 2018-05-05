@@ -9,7 +9,7 @@
 		<section id="hero_in" class="general">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>Keep Yourself Learning</h1>
+					<h1 class="fadeInUp"><span></span>Article</h1>
 				</div>
 			</div>
 		</section>
@@ -28,7 +28,7 @@
 								<li><a href="#"><i class="icon_folder-alt" style="color:rgb(23,144,233);"></i> <%- details[0].category %></a></li>
 								<li><a href="#"><i class="icon_clock_alt" style="color:rgb(23,144,233);"></i> <%= new Date(details[0].created_at).toDateString() %></a></li>
 								<li><a href="#"><i class="icon_pencil-edit" style="color:rgb(23,144,233);"></i> <%= details[0].created_by %></a></li>
-								<li><a href="#"><i class="icon_comment_alt" style="color:rgb(23,144,233);"></i> (14) Comments</a></li>
+								<li><a href="#"><i class="icon_comment_alt" style="color:rgb(23,144,233);"></i> (<% if(typeof details[0].comments != 'undefined'){%><%= details[0].comments.length %><%}else{%>0<%} %>) Comments</a></li>
 							</ul>
 						</div>
 						<!-- /post meta -->

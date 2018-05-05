@@ -1,19 +1,19 @@
-<% include templates/head.ejs %>
+<% include ../templates/head.ejs %>
 
 <body class="fixed-nav sticky-footer" id="page-top">
   <!-- Navigation-->
-  <% include templates/navigation.ejs %>
+  <% include ../templates/navigation.ejs %>
   <!-- /Navigation-->
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
-      <% include templates/breadcrumbs.ejs %>
+      <% include ../templates/breadcrumbs.ejs %>
 		<!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
            <div class="row">
-            <div class="col-md-6"><i class="fa fa-table"></i> Categories</div>
-            <div class="col-md-6 text-right"><a href="/category/add" class="fa fa-plus btn btn-warning"> Create New Category</a> </div>
+            <div class="col-md-6"><i class="fa fa-table"></i> Course Categories</div>
+            <div class="col-md-6 text-right"><a href="/admin/course/category/add" class="fa fa-plus btn btn-warning"> Create New Category</a> </div>
           </div>
       </div>
         <div class="card-body">
@@ -55,7 +55,7 @@
 	  <!-- /container-fluid-->
    	</div>
     <!-- /container-wrapper-->
-    <% include templates/footers.ejs %>
+    <% include ../templates/footers.ejs %>
 	
 </body>
 </html>
