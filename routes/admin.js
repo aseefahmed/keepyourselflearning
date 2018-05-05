@@ -8,7 +8,7 @@ var upload = multer({ dest: './public/img/uploads' })
 router.use(flash());
 
 router.get('/dashboard', ensureAuthenticated, function(req, res, next) {
-	res.send('--------------');
+	res.send('--------------1111111');
   let posts = db.get('posts');
   let total_posts = posts.count({},{}, function(err,count_posts){
 
