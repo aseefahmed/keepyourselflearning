@@ -39,7 +39,7 @@ router.get('/logout', function(req, res){
 router.get('/posts', function(req, res){
 	let posts = db.get('posts');
 	
-	posts.find({}, {}, function(err, posts){
+	posts.find({}, {sort:{updated_at:-1}}, function(err, posts){
 		let data = { 
 				pageName: 'Posts',  
 				posts: posts }
