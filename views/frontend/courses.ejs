@@ -56,36 +56,14 @@
 							<div class="filter_type">
 								<h6>Category</h6>
 								<ul>
+									<% categories.forEach(function(cat){%>
 									<li>
 										<label>
-											<input type="checkbox" class="icheck" checked>all <small>(945)</small>
+											<input type="checkbox" class="icheck"><%= cat.name.toUpperCase() %> <!--small>(45)</small-->
 										</label>
 									</li>
-									<li>
-										<label>
-											<input type="checkbox" class="icheck">Architecture <small>(45)</small>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox" class="icheck">Managment <small>(30)</small>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox" class="icheck">Business <small>(25)</small>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox" class="icheck">Litterature <small>(56)</small>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="checkbox" class="icheck">Biology <small>(10)</small>
-										</label>
-									</li>
+									<% }) %>
+									
 								</ul>
 							</div>
 							<div class="filter_type">
@@ -131,142 +109,35 @@
 				<!-- /aside -->
 
 				<div class="col-lg-9" id="list_sidebar">
+					<% courses.forEach(function(c){ %>
 					<div class="box_list wow">
 						<div class="row no-gutters">
 							<div class="col-lg-5">
 								<figure class="block-reveal">
 									<div class="block-horizzontal"></div>
-									<a href="course-detail.html"><img src="img/course__list_1.jpg" alt=""></a>
+									<a href="/course/get/<%= c._id %>"><img src="/img/courses/uploads/<%= c.image %>" alt=""></a>
 									<div class="preview"><span>Preview course</span></div>
 								</figure>
 							</div>
 							<div class="col-lg-7">
 								<div class="wrapper">
 									<a href="#0" class="wish_bt"></a>
-									<div class="price">$39</div>
-									<small>Category</small>
-									<h3>Persius delenit has cu</h3>
-									<p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Eam id legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam recusabo mel no. </p>
+									<div class="price">$<%= c.price %></div>
+									<small><%= c.category %></small>
+									<h3><%= c.title %></h3>
+									<p><%= c.short_description.substring(0,108) %> </p>
 									<div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></div>
 								</div>
 								<ul>
-									<li><i class="icon_clock_alt"></i> 1h 30min</li>
-									<li><i class="icon_like"></i> 890</li>
-									<li><a href="course/get/5aed6a603b17f90498c96642">Details</a></li>
+									<!--li><i class="icon_clock_alt"></i> 1h 30min</li>
+									<li><i class="icon_like"></i> 890</li-->
+									<li><a href="/course/get/<%= c._id %>">Details</a></li>
 								</ul>
 							</div>
 						</div>
 					</div>
-					<!-- /box_list -->
-					<div class="box_list wow">
-						<div class="row no-gutters">
-							<div class="col-lg-5">
-								<figure class="block-reveal">
-									<div class="block-horizzontal"></div>
-									<a href="course-detail.html"><img src="img/course__list_2.jpg" class="img-fluid" alt=""></a>
-									<div class="preview"><span>Preview course</span></div>
-								</figure>
-							</div>
-							<div class="col-lg-7">
-								<div class="wrapper">
-									<a href="#0" class="wish_bt"></a>
-									<div class="price">$25</div>
-									<small>Category</small>
-									<h3>At deseruisse scriptorem</h3>
-									<p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates neglegentur. Eam id legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam recusabo mel no. </p>
-									<div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></div>
-								</div>
-								<ul>
-									<li><i class="icon_clock_alt"></i> 1h 30min</li>
-									<li><i class="icon_like"></i> 890</li>
-									<li><a href="course-detail.html">Details</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /box_list -->
-					<div class="box_list wow">
-						<div class="row no-gutters">
-							<div class="col-lg-5">
-								<figure class="block-reveal">
-									<div class="block-horizzontal"></div>
-									<a href="course-detail.html"><img src="img/course__list_3.jpg" class="img-fluid" alt=""></a>
-									<div class="preview"><span>Preview course</span></div>
-								</figure>
-							</div>
-							<div class="col-lg-7">
-								<div class="wrapper">
-									<a href="#0" class="wish_bt"></a>
-									<div class="price">$120</div>
-									<small>Category</small>
-									<h3>Ea vel semper quaerendum</h3>
-									<p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates neglegentur. Eam id legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam recusabo mel no. </p>
-									<div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></div>
-								</div>
-								<ul>
-									<li><i class="icon_clock_alt"></i> 1h 30min</li>
-									<li><i class="icon_like"></i> 890</li>
-									<li><a href="course-detail.html">Details</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /box_list -->
-					<div class="box_list wow">
-						<div class="row no-gutters">
-							<div class="col-lg-5">
-								<figure class="block-reveal">
-									<div class="block-horizzontal"></div>
-									<a href="course-detail.html"><img src="img/course__list_4.jpg" class="img-fluid" alt=""></a>
-									<div class="preview"><span>Preview course</span></div>
-								</figure>
-							</div>
-							<div class="col-lg-7">
-								<div class="wrapper">
-									<a href="#0" class="wish_bt"></a>
-									<div class="price">$54</div>
-									<small>Category</small>
-									<h3>Ei has exerci graecis</h3>
-									<p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates neglegentur. Eam id legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam recusabo mel no. </p>
-									<div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></div>
-								</div>
-								<ul>
-									<li><i class="icon_clock_alt"></i> 1h 30min</li>
-									<li><i class="icon_like"></i> 890</li>
-									<li><a href="course-detail.html">Details</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /box_list -->
-					<div class="box_list wow">
-						<div class="row no-gutters">
-							<div class="col-lg-5">
-								<figure class="block-reveal">
-									<div class="block-horizzontal"></div>
-									<a href="course-detail.html"><img src="img/course__list_5.jpg" class="img-fluid" alt=""></a>
-									<div class="preview"><span>Preview course</span></div>
-								</figure>
-							</div>
-							<div class="col-lg-7">
-								<div class="wrapper">
-									<a href="#0" class="wish_bt"></a>
-									<div class="price">$60</div>
-									<small>Category</small>
-									<h3>Decore tractatos</h3>
-									<p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates neglegentur. Eam id legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam recusabo mel no. </p>
-									<div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></div>
-								</div>
-								<ul>
-									<li><i class="icon_clock_alt"></i> 1h 30min</li>
-									<li><i class="icon_like"></i> 890</li>
-									<li><a href="course-detail.html">Details</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /box_list -->
-					<p class="text-center add_top_60"><a href="#0" class="btn_1 rounded">Load more</a></p>
+					<% }) %>
+					
 				</div>
 				<!-- /col -->
 			</div>
