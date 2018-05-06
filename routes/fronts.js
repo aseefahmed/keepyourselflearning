@@ -207,8 +207,19 @@ router.get('/post/get/:id', function(req, res){
 });
 
 router.get('/courses', function(req, res){
-	let data = {pageName: 'Courses'};
-	res.render('frontend/courses', data);
+	let courses = db.get('courses');
+	courses.find({},{},function(err,course){
+		let categories = db.get('course_categories');
+		categories.find({},{},function(err,cat){
+			let data = {
+			pageName: 'Courses',
+			courses: course,
+			categories: cat
+		};
+		res.render('frontend/courses', data);	
+		})
+	})
+	
 });
 
 router.get('/login', function(req, res){
