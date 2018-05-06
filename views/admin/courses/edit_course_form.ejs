@@ -135,13 +135,61 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											
-											<input type="text" class="form-control" placeholder="Learning Outcomes" name="learning_outcomes" id="learning_outcomes" required>
+											<input type="text" class="form-control" placeholder="Learning Outcomes" name="learning_outcomes" id="learning_outcomes" >
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											
-										<input type="button" class="btn_1 medium" id="learning_outcomes_btn" value="Add">
+										<input type="button" class="btn_1 medium" id="learning_outcomes_btn" value="Add Outcome">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box_general padding_bottom">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Lessons</label>
+									<div class="box_general padding_bottom">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<div id="learning_lessons_div">
+															<% if(typeof courses[0].lessons == 'undefined' || courses[0].lessons.length == 0){%>
+																No lessons listed
+															<% } else {
+																courses[0].lessons.forEach(function(lesson, key){ %>
+																<div class='alert <%if (key%2==0){%>alert-success<%}else{%>alert-primary<%}%>'>
+																		<div class="row">
+																			<div class="col-md-6" >
+																			<span style="font-weight:bold;text-decoration:underline;"><%= lesson.lessons %></span>
+																			<span style="text-decoration:none;cursor:pointer;" class="text-danger delete_lesson_btn" lesson_id_="<%= lesson.lesson_id %>" ><i class="fa fa-trash"></i></span>
+																			</div>
+																			
+																		</div>
+																		<div class="row">
+																			<div class="col-md-12"><%= lesson.message %></div>
+																		</div>
+																</div>
+															<% })} %>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											
+											<input type="text" class="form-control" placeholder="Course Lesson" name="course_lesson" id="course_lesson">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											
+										<input type="button" class="btn_1 medium" id="learning_lesson_btn" value="Add Lesson">
 										</div>
 									</div>
 								</div>
@@ -153,7 +201,7 @@
 			</div>
 		</form>	
 	  </div>
-	  <div class="modal fade" id="delete_outcome_modal" tabindex="-1" role="dialog" aria-labelledby="delete_post_modal" aria-hidden="true">
+	    <div class="modal fade" id="delete_outcome_modal" tabindex="-1" role="dialog" aria-labelledby="delete_post_modal" aria-hidden="true">
 	      <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	          <div class="modal-header">
@@ -167,6 +215,27 @@
 	            <button class="btn btn-secondary" type="button" data-dismiss="modal" style="cursor: pointer">Cancel</button>
 	            <form method="POST" action="/admin/course/outcome/delete">
 	              <input type="hidden" id="deletable_outcome_id" name="deletable_outcome_id"/>
+	              <input type="hidden" id="course_id" name="course_id" value="<%= courses[0]._id %>" />
+	              <input type="submit" class="btn btn-primary" value="Agree" style="cursor: pointer" >
+	            </form>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="modal fade" id="delete_lesson_modal" tabindex="-1" role="dialog" aria-labelledby="delete_post_modal" aria-hidden="true">
+	      <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <h5 class="modal-title" id="exampleModalLabel">Ready to Delete?</h5>
+	            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+	              <span aria-hidden="true">×</span>
+	            </button>
+	          </div>
+	          <div class="modal-body">Select "Agree" below if you are ready to delete this lesson.</div>
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal" style="cursor: pointer">Cancel</button>
+	            <form method="POST" action="/admin/course/lesson/delete">
+	              <input type="hidden" id="deletable_lesson_id" name="deletable_lesson_id"/>
 	              <input type="hidden" id="course_id" name="course_id" value="<%= courses[0]._id %>" />
 	              <input type="submit" class="btn btn-primary" value="Agree" style="cursor: pointer" >
 	            </form>

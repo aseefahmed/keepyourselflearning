@@ -181,6 +181,17 @@ router.post('/admin/course/outcome/delete', function(req, res){
 		res.redirect('/admin/course/edit/'+req.body.course_id);		
 });
 
+router.post('/admin/course/lesson/delete', function(req, res){
+	
+		let course = db.get('courses');
+		course.update(
+		  { _id: req.body.course_id },
+		  { $pull: { lessons: { lesson_id: req.body.deletable_lesson_id } } },
+		  { multi: true }
+		);
+		res.redirect('/admin/course/edit/'+req.body.course_id);		
+});
+
 router.post('/admin/course/outcomes/submit', function(req, res){
 
 	 let course = db.get('courses');
@@ -191,6 +202,19 @@ router.post('/admin/course/outcomes/submit', function(req, res){
 	 course.update(
 	 	{_id: req.body.course_id},  
 	 	{$push: {learning_outcomes: {$each:[ json ]}}})
+	 res.send(req.body)
+});
+
+router.post('/admin/course/lesson/submit', function(req, res){
+
+	 let course = db.get('courses');
+	 let json = {
+	 	lesson_id: Math.random().toString(36).substr(2, 9),
+	 	lessons: req.body.course_lesson
+	 };
+	 course.update(
+	 	{_id: req.body.course_id},  
+	 	{$push: {lessons: {$each:[ json ]}}})
 	 res.send(req.body)
 });
 
