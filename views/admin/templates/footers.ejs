@@ -168,10 +168,41 @@
           $('#delete_course_modal').modal('show');
         });
 
+        $('#learning_outcomes_btn').click(function(e){
+          e.preventDefault();
+          data = {
+            learning_outcomes : $('#learning_outcomes').val(),
+            course_id : $('#course_id').val()
+          }
+          console.log(data)
+          $.post('/admin/course/outcomes/submit', data, function(output){
+
+               var str = "<div class='alert alert-warning'>";
+                  str += "<div class='row'>";
+                  str += "<div class='col-md-6' >";
+                  str += "<span style='font-weight:bold;text-decoration:underline;'>"+$('#learning_outcomes').val()+"</span>"
+                  str += "<span style='text-decoration:none;cursor:pointer;' class='text-danger delete_outcome_btn'><i class='fa fa-trash'></i></span>";
+                  str += "</div>";
+                  
+                  str += "</div>";
+                  str += "</div>";
+            $('#learning_outcomes_div').append(str);
+            $('#learning_outcomes').val('');
+            
+            
+          });
+
+        });
+
 
         $('.delete_comment_btn').click(function(e){
           $('#deletable_comment_id').val($(this).attr('comment_id_'));
           $('#delete_comment_modal').modal('show');
+        });
+
+        $('.delete_outcome_btn').click(function(e){
+          $('#deletable_outcome_id').val($(this).attr('outcome_id_'));
+          $('#delete_outcome_modal').modal('show');
         })
       });
     </script>
