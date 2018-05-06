@@ -45,7 +45,11 @@
 											<li>
 												<div class="thumb"><img src="/img/uploads/<%= post.image %>" alt=""></div> <%= post.created_by %>
 											</li>
-											<li><i class="icon_comment_alt"></i> <% if(typeof post.comments == 'undefined'){%>0<% }else{%><%= post.comments.length %><% } %></li>
+											<li><% if(typeof post.external_link == 'undefined' || post.external_link == ""){ %>
+												<i class="icon_comment_alt"></i> <% if(typeof post.comments == 'undefined'){%>0<% }else{%><%= post.comments.length %><% } %>
+											<% }else{ %> 
+												<i class="text-danger icon-link-ext"></i> 
+											<% } %></li>
 										</ul>
 									</div>
 								</div>
