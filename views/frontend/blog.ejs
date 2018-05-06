@@ -31,7 +31,7 @@
 							<div class="row no-gutters">
 								<div class="col-lg-7">
 									<figure>
-										<a href="/post/get/<%= post._id %>"><img src="/img/uploads/<%= post.image %>" alt="<%= post.title %>">
+										<a target="_blank" href="<% if(typeof post.external_link == 'undefined' || post.external_link == ""){%>/post/get/<%= post._id %><%}else{%><%= post.external_link %><%} %>"><img src="/img/uploads/<%= post.image %>" alt="<%= post.title %>">
 											<div class="preview"><span>Read more</span></div>
 										</a>
 									</figure>
@@ -39,7 +39,7 @@
 								<div class="col-lg-5">
 									<div class="post_info">
 										<small><%= new Date(post.created_at).toDateString() %></small>
-										<h3 class="text-left"><a href="/post/get/<%= post._id %>"><%= post.title %></a></h3>
+										<h3 class="text-left"><a target="_blank" href="<% if(typeof post.external_link == 'undefined' || post.external_link == ""){%>/post/get/<%= post._id %><%}else{%><%= post.external_link %><%} %>"><%= post.title %></a></h3>
 										<p class="text-left"><%= post.short_description %></p>
 										<ul>
 											<li>
