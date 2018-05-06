@@ -123,27 +123,27 @@
 			</div>
 		</form>	
 	  </div>
-	  <div class="modal fade" id="delete_comment_modal" tabindex="-1" role="dialog" aria-labelledby="delete_post_modal" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Delete?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Agree" below if you are ready to delete this comment.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal" style="cursor: pointer">Cancel</button>
-            <form method="POST" action="/comment/delete">
-              <input type="hidden" id="deletable_comment_id" name="deletable_comment_id"/>
-              <input type="hidden" id="post_id" name="post_id" value="<%= post[0]._id %>" />
-              <input type="submit" class="btn btn-primary" value="Agree" style="cursor: pointer" >
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+	    <div class="modal fade" id="delete_comment_modal" tabindex="-1" role="dialog" aria-labelledby="delete_post_modal" aria-hidden="true">
+	      <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <h5 class="modal-title" id="exampleModalLabel">Ready to Delete?</h5>
+	            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+	              <span aria-hidden="true">×</span>
+	            </button>
+	          </div>
+	          <div class="modal-body">Select "Agree" below if you are ready to delete this comment.</div>
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal" style="cursor: pointer">Cancel</button>
+	            <form method="POST" action="/comment/delete">
+	              <input type="hidden" id="deletable_comment_id" name="deletable_comment_id"/>
+	              <input type="hidden" id="post_id" name="post_id" value="<%= post[0]._id %>" />
+	              <input type="submit" class="btn btn-primary" value="Agree" style="cursor: pointer" >
+	            </form>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
 	  <!-- /.container-fluid-->
    	</div>
     <!-- /.container-wrapper-->

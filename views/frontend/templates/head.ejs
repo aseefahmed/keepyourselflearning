@@ -17,8 +17,11 @@
     <meta name="author" content="Ansonika">
     <% if(pageName == 'Index') { %>
         <title>Keep Yourself Learning</title>
-    <% } else %>
+    <% }else if(pageName == 'Course Details'){ %>
+        <title><%= course[0].title %> | Keep Yourself Learning</title>
+    <% } else{ %>
         <title><%= pageName %> | Keep Yourself Learning</title>
+    <% } %>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">

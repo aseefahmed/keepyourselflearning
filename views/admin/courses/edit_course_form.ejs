@@ -9,7 +9,7 @@
       <!-- Breadcrumbs-->
       <% include ../templates/breadcrumbs.ejs %>
         <form method="POST" action="/admin/course/update" enctype="multipart/form-data">
-        	<input type="hidden" name="course_id" value="<%= courses[0]._id %>">
+        	<input type="hidden" name="course_id" id="course_id" value="<%= courses[0]._id %>">
         	<div class="row">
 				<div class="col-md-8">
 					<div class="box_general padding_bottom">
@@ -34,10 +34,16 @@
 								</div>
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-3">
 								<div class="form-group">
-									<label>Category</label>
+									<label>Price</label>
 									<input type="text" class="form-control" placeholder="Price" name="price" value="<%= courses[0].price %>">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>Regular Price</label>
+									<input type="text" class="form-control" placeholder="Regular Price" name="regular_price" value="<%= courses[0].regular_price %>">
 								</div>
 							</div>
 
@@ -45,6 +51,12 @@
 								<div class="form-group">
 									<label>Short Description <a href="#0" data-toggle="tooltip" data-placement="top" title="Maximum 300 character allowed."><i class="fa fa-fw fa-question-circle"></i></a></label>
 									<textarea class="form-control" placeholder="Description" style="height: 100px;" name="short_description" id="short_description"><%= courses[0].short_description %></textarea>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Video Link <span style="font-weight:bold" class="text-danger">*</span> <a href="#0" data-toggle="tooltip" data-placement="top" title="Upload relavant video link."><i class="fa fa-fw fa-question-circle"></i></a></label>
+									<input type="text" class="form-control" placeholder="Video Link" name="video_link" value="<%= courses[0].video_link %>" required>
 								</div>
 							</div>
 						</div>
@@ -88,11 +100,80 @@
 							</div>
 						</div>
 					</div>
+					<div class="box_general padding_bottom">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Learning Outcomes </label>
+									<div class="box_general padding_bottom">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<div id="learning_outcomes_div">
+															<% if(typeof courses[0].learning_outcomes == 'undefined' || courses[0].learning_outcomes.length == 0){%>
+																No learning outcome listed
+															<% } else {
+																courses[0].learning_outcomes.forEach(function(outcome, key){ %>
+																<div class='alert <%if (key%2==0){%>alert-success<%}else{%>alert-primary<%}%>'>
+																		<div class="row">
+																			<div class="col-md-6" >
+																			<span style="font-weight:bold;text-decoration:underline;"><%= outcome.learning_outcomes %></span>
+																			<span style="text-decoration:none;cursor:pointer;" class="text-danger delete_outcome_btn" outcome_id_="<%= outcome.outcome_id %>" ><i class="fa fa-trash"></i></span>
+																			</div>
+																			
+																		</div>
+																		<div class="row">
+																			<div class="col-md-12"><%= outcome.message %></div>
+																		</div>
+																</div>
+															<% })} %>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											
+											<input type="text" class="form-control" placeholder="Learning Outcomes" name="learning_outcomes" id="learning_outcomes" required>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											
+										<input type="button" class="btn_1 medium" id="learning_outcomes_btn" value="Add">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					
 				</div>
 			</div>
 		</form>	
 	  </div>
+	  <div class="modal fade" id="delete_outcome_modal" tabindex="-1" role="dialog" aria-labelledby="delete_post_modal" aria-hidden="true">
+	      <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <h5 class="modal-title" id="exampleModalLabel">Ready to Delete?</h5>
+	            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+	              <span aria-hidden="true">×</span>
+	            </button>
+	          </div>
+	          <div class="modal-body">Select "Agree" below if you are ready to delete this learning outcome.</div>
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal" style="cursor: pointer">Cancel</button>
+	            <form method="POST" action="/admin/course/outcome/delete">
+	              <input type="hidden" id="deletable_outcome_id" name="deletable_outcome_id"/>
+	              <input type="hidden" id="course_id" name="course_id" value="<%= courses[0]._id %>" />
+	              <input type="submit" class="btn btn-primary" value="Agree" style="cursor: pointer" >
+	            </form>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
 	  
     </div>
 	  <!-- /.container-fluid-->

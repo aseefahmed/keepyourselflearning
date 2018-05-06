@@ -16,6 +16,19 @@ router.get('/admin/course/categories', function(req, res){
 	
 });
 
+router.get('/course/get/:id', function(req, res){
+	let course = db.get('courses');
+	course.find({_id: req.params.id},{},function(err,course){
+		let data = {
+		pageName: "Course Details",
+		course: course
+	};
+
+	res.render('frontend/course_details', data)
+	})
+	
+});
+
 router.get('/admin/course/category/add', function(req, res){
 	let data = { pageName: 'New Category', parentPageName: 'Courses', parentPageRoute:'/admin/courses' }
 	res.render('admin/courses/new_categories_form', data);
@@ -102,6 +115,7 @@ router.post('/admin/course/update', upload.single('post_file'), function(req, re
 			category: req.body.category,
 			price: req.body.price,
 			short_description: req.body.short_description,
+			video_link: req.body.video_link,
 			description: req.body.description,
 			image: mainimage,
 			updated_at: new Date()
@@ -112,7 +126,9 @@ router.post('/admin/course/update', upload.single('post_file'), function(req, re
 	  		title: req.body.title,
 			category: req.body.category,
 			price: req.body.price,
+			regular_price: req.body.regular_price,
 			short_description: req.body.short_description,
+			video_link: req.body.video_link,
 			description: req.body.description,
 			updated_at: new Date()
 	  	};
@@ -154,6 +170,32 @@ router.post('/admin/course/delete', function(req, res){
 	res.redirect('/admin/courses');
 });
 
+router.post('/admin/course/outcome/delete', function(req, res){
+	
+		let course = db.get('courses');
+		course.update(
+		  { _id: req.body.course_id },
+		  { $pull: { learning_outcomes: { outcome_id: req.body.deletable_outcome_id } } },
+		  { multi: true }
+		);
+		res.redirect('/admin/course/edit/'+req.body.course_id);		
+});
+
+router.post('/admin/course/outcomes/submit', function(req, res){
+
+	 let course = db.get('courses');
+	 let json = {
+	 	outcome_id: Math.random().toString(36).substr(2, 9),
+	 	learning_outcomes: req.body.learning_outcomes
+	 };
+	 course.update(
+	 	{_id: req.body.course_id},  
+	 	{$push: {learning_outcomes: {$each:[ json ]}}})
+	 res.send(req.body)
+});
+
+
+
 router.post('/admin/course/submit', upload.single('post_file'), function(req, res){
 
 	
@@ -178,9 +220,13 @@ router.post('/admin/course/submit', upload.single('post_file'), function(req, re
 			title: req.body.title,
 			category: req.body.category,
 			price: req.body.price,
+			regular_price: req.body.regular_price,
 			short_description: req.body.short_description,
+			video_link: req.body.video_link,
 			description: req.body.description,
 			image: mainimage,
+			learning_outcomes: [],
+			lessons: [],
 			created_at: new Date(),
 			updated_at: new Date()
 
