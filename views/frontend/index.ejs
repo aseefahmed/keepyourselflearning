@@ -243,7 +243,7 @@
 									<figcaption><strong><% if(latest.created_at.getDate()<10){%>0<%} %><%= latest.created_at.getDate() %></strong><%= months[latest.created_at.getMonth()].substring(0,3) %></figcaption>
 								</figure>
 								<h4><%= latest.title %></h4>
-								<p><%= latest.short_description %></p>
+								<p><%= latest.short_description.substring(0,100) %></p>
 							</a>
 						</div>
 						<!-- /box_news -->
@@ -251,7 +251,7 @@
 					
 				</div>
 				<!-- /row -->
-				<p class="btn_home_align"><a href="blog.html" class="btn_1 rounded">View all news</a></p>
+				<p class="btn_home_align"><a href="/blog" class="btn_1 rounded">View all articles</a></p>
 			</div>
 			<!-- /container -->
 		</div>
