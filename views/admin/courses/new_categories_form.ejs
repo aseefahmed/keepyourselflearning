@@ -10,7 +10,7 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <% include ../templates/breadcrumbs.ejs %>
-        <form method="POST" action="submit">	
+        <form method="POST" action="submit" enctype="multipart/form-data">	
 			<div class="box_general padding_bottom">
 				
 					<div class="header_box version_2">
@@ -23,7 +23,15 @@
 								<input type="text" class="form-control" placeholder="Category title" name="category_name">
 							</div>
 						</div>
-					</div>				
+					</div>		
+					<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Thumbnail Image <a href="#0" data-toggle="tooltip" data-placement="top" title="Upload relavant image for this category."><i class="fa fa-fw fa-question-circle"></i></a></label>
+									<input type="file" class="form-control"  name="post_file" id="post_file">
+								</div>
+							</div>
+						</div>			
 				<!-- /row-->
 			</div>
 			<!-- /box_general-->
