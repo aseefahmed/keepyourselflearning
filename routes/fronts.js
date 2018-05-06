@@ -21,8 +21,20 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/', function(req, res){
-	let data = {pageName: 'Index'};
-	res.render("frontend/index", data);
+	
+	/*let a = db.get('course_categories');
+	a.remove({})*/
+	let course_categories = db.get('course_categories');
+
+	course_categories.find({},{limit:6,sort:{created_at:1}},function(err,categories){
+
+		let data = {
+			pageName: 'Index',
+			categories: categories
+		};
+		res.render("frontend/index", data);
+	})
+	
 });
 
 router.get('/blog', function(req, res){

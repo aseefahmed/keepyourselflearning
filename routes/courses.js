@@ -21,18 +21,37 @@ router.get('/admin/course/category/add', function(req, res){
 	res.render('admin/courses/new_categories_form', data);
 });
 
-router.post('/admin/course/category/submit', function(req, res){
+router.post('/admin/course/category/submit', upload.single('post_file'), function(req, res){
+
 	req.checkBody('category_name', "Name is required").notEmpty();
+
+	if(req.file){
+	  	/*var random = Math.ceil(Math.random()*10000000000);
+	  	filename = random+"_"+req.file.originalname;*/
+	  	var mainimage = req.file.filename;
+	  	var json = {
+	  		name: req.body.category_name.toLowerCase(),
+	  		image: mainimage,
+			created_at: new Date(),
+			no_of_programs: 0,
+			updated_at: new Date()
+	  	};
+
+	  } else {
+	  	var json = {
+	  		name: req.body.category_name.toLowerCase(),
+	  		image: "mainimage",
+			no_of_programs: 0,
+			created_at: new Date(),
+			updated_at: new Date()
+	  	};
+	  }
 	var errors = req.validationErrors();
 	if(errors){
 		res.send('err')
 	}else{
 		var categories = db.get('course_categories');
-		categories.insert({
-			name: req.body.category_name.toLowerCase(),
-			created_at: new Date(),
-			updated_at: new Date()
-		}, function(err, categories){
+		categories.insert(json, function(err, categories){
 			if(err){
 				res.send('d1')
 			}else{

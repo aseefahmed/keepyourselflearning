@@ -11,6 +11,7 @@ var flash = require('connect-flash');
 var expressValidator = require('express-validator');
 var mongo = require('mongodb');
 var io = require('socket.io')();
+var os = require('os')
 
 var app = express();
 app.locals.moment = require('moment');
@@ -50,7 +51,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 var server = app.listen(port, function(){
-	console.log('listening on port '+port)
+	console.log('listening on port '+port);
+  
 });
 
 io.attach(server);
