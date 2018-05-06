@@ -22,17 +22,22 @@ router.use(passport.session());
 
 router.get('/', function(req, res){
 	
-	/*let a = db.get('course_categories');
-	a.remove({})*/
 	let course_categories = db.get('course_categories');
 
 	course_categories.find({},{limit:6,sort:{created_at:1}},function(err,categories){
 
-		let data = {
-			pageName: 'Index',
-			categories: categories
-		};
-		res.render("frontend/index", data);
+		let latest_posts = db.get('posts');
+		latest_posts.find({},{limit:6, sort:{created_at:-1}},function(err,posts){
+			var monthNames = [ "January", "February", "March", "April", "May", "June", 
+                       "July", "August", "September", "October", "November", "December" ];
+			let data = {
+				pageName: 'Index',
+				months: monthNames,
+				latest_posts: posts,
+				categories: categories
+			};
+			res.render("frontend/index", data);
+		})
 	})
 	
 });
