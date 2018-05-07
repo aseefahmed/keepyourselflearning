@@ -9,7 +9,7 @@
 		<section id="hero_in" class="courses">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>Online courses</h1>
+					<h1 class="fadeInUp"><span></span>Our Courses</h1>
 				</div>
 			</div>
 		</section>
@@ -30,17 +30,17 @@
 					</li>
 					<li>
 						<div class="layout_view">
-							<a href="courses-grid.html"><i class="icon-th"></i></a>
+							<a href="/grid/courses"><i class="icon-th"></i></a>
 							<a href="#0" class="active"><i class="icon-th-list"></i></a>
 						</div>
 					</li>
 					<li>
-						<select name="orderby" class="selectbox">
+						<select name="orderby" class="selectbox" id="choose_cat_btn">
 							<option value="category">Category</option>
-							<option value="category 2">Literature</option>
-							<option value="category 3">Architecture</option>
-							<option value="category 4">Economy</option>
-							</select>
+							<% categories.forEach(function(cat){ %>
+									<option value="<%= cat.name %>"><%= cat.name %></option>
+							<% }) %>
+						</select>
 					</li>
 				</ul>
 			</div>
@@ -115,7 +115,7 @@
 							<div class="col-lg-5">
 								<figure class="block-reveal">
 									<div class="block-horizzontal"></div>
-									<a href="/course/get/<%= c._id %>"><img src="/img/courses/uploads/<%= c.image %>" alt=""></a>
+									<a href="/course/get/<%= c._id %>"><img src="/img/courses/uploads/<%= c.image %>" alt="<%= c.title %>"></a>
 									<div class="preview"><span>Preview course</span></div>
 								</figure>
 							</div>
