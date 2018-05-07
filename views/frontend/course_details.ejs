@@ -228,7 +228,7 @@
 								<a href="<%= course[0].video_link %>" class="video"><i class="arrow_triangle-right"></i><img src="/img/courses/uploads/<%= course[0].image %>" alt="" class="img-fluid"><span>View course preview</span></a>
 							</figure>
 							<div class="price">
-								$<%= course[0].price %><span class="original_price"><em>$<%= course[0].regular_price %></em><%= ((course[0].regular_price-course[0].price)/course[0].regular_price)*100 %>% OFF</span>
+								$<%= course[0].price %><span class="original_price"><em>$<%= course[0].regular_price %></em><%= Math.round(((course[0].regular_price-course[0].price)/course[0].regular_price)*100) %>% OFF</span>
 							</div>
 							<a href="/contact" class="btn_1 full-width">Contact Us</a>
 							<!-- <a href="#0" class="btn_1 full-width outline"><i class="icon_heart"></i> Add to wishlist</a> -->
