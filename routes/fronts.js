@@ -206,9 +206,15 @@ router.get('/post/get/:id', function(req, res){
 	
 });
 
-router.get('/courses', function(req, res){
+router.get('/courses/:category?', function(req, res){
+	if(typeof req.params.category == 'undefined'){
+		var filter = {}
+	}else{
+		var filter = {category:req.params.category}
+	}
 	let courses = db.get('courses');
-	courses.find({},{},function(err,course){
+	
+	courses.find(filter,{},function(err,course){
 		let categories = db.get('course_categories');
 		categories.find({},{},function(err,cat){
 			let data = {
@@ -217,6 +223,28 @@ router.get('/courses', function(req, res){
 			categories: cat
 		};
 		res.render('frontend/courses', data);	
+		})
+	})
+	
+});
+
+router.get('/grid/courses/:category?', function(req, res){
+	if(typeof req.params.category == 'undefined'){
+		var filter = {}
+	}else{
+		var filter = {category:req.params.category}
+	}
+	let courses = db.get('courses');
+	
+	courses.find(filter,{},function(err,course){
+		let categories = db.get('course_categories');
+		categories.find({},{},function(err,cat){
+			let data = {
+			pageName: 'Courses',
+			courses: course,
+			categories: cat
+		};
+		res.render('frontend/grid_courses', data);	
 		})
 	})
 	

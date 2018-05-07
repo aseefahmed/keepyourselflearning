@@ -9,8 +9,8 @@
 		<section class="header-video">
 			<div id="hero_video">
 				<div>
-					<h3><strong>Top courses</strong><br>on Udema Accademy</h3>
-					<p>Eam fastidii erroribus corrumpit cu, in quo epicuri recusabo, <strong>est vocent eleifend</strong> inimicus at.</p>
+					<h3><strong>Top courses</strong><br>on <span style="color:gold">Keep Yourself Learning</span></h3>
+					<p>We keep our knowledge updated with <strong>latest technologies</strong> and so you do.</p>
 				</div>
 				<a href="#first_section" class="btn_explore hidden_tablet"><i class="ti-arrow-down"></i></a>
 			</div>
@@ -192,7 +192,7 @@
 			</div>
 			<!-- /carousel -->
 			<div class="container">
-				<p class="btn_home_align"><a href="courses-grid.html" class="btn_1 rounded">View all courses</a></p>
+				<p class="btn_home_align"><a href="/courses" class="btn_1 rounded">View all courses</a></p>
 			</div>
 			<!-- /container -->
 			<hr>
@@ -208,7 +208,7 @@
 				<% categories.forEach(function(category){ %>
 					<!-- /grid_item -->
 					<div class="col-lg-4 col-md-6 wow" data-wow-offset="150">
-						<a href="#0" class="grid_item">
+						<a href="/courses/<%= category.name %>" class="grid_item">
 							<figure class="block-reveal">
 								<div class="block-horizzontal"></div>
 								<img src="img/courses/uploads/<%= category.image %>" class="img-fluid" alt="">

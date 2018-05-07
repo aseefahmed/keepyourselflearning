@@ -108,6 +108,11 @@
 	<% } %>
 	<script>
 		$(function(){
+			$('#choose_cat_btn').change(function(e){
+				category = $(this).val();
+				location.href = "/courses/"+category;
+			});
+
 			$('#submit_comment_btn').click(function(e){
 				if($('#name').val() == ""){
 					$('#name-err').css('display', 'inline');
@@ -169,7 +174,7 @@
 					
 
 					$('#comment_area_div').append(str).fadeIn("slow");
-					console.log(data);
+					
 				})
 			})
 		})
