@@ -30,7 +30,6 @@ router.get('/', function(req, res){
 		latest_posts.find({},{limit:6, sort:{created_at:-1}},function(err,posts){
 			let courses = db.get('courses');
 			courses.find({},{limit:6}, function(err,c){
-				res.send('o')
 				var monthNames = [ "January", "February", "March", "April", "May", "June", 
                        "July", "August", "September", "October", "November", "December" ];
 				let data = {
