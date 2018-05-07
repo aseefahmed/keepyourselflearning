@@ -27,7 +27,7 @@ router.get('/', function(req, res){
 	course_categories.find({},{limit:6,sort:{created_at:1}},function(err,categories){
 
 		let latest_posts = db.get('posts');
-		latest_posts.find({},{limit:6, sort:{created_at:-1}},function(err,posts){
+		latest_posts.find({},{limit:4, sort:{created_at:-1}},function(err,posts){
 			let courses = db.get('courses');
 			courses.find({},{limit:6}, function(err,c){
 				var monthNames = [ "January", "February", "March", "April", "May", "June", 
