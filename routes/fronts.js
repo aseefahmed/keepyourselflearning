@@ -28,15 +28,19 @@ router.get('/', function(req, res){
 
 		let latest_posts = db.get('posts');
 		latest_posts.find({},{limit:6, sort:{created_at:-1}},function(err,posts){
-			var monthNames = [ "January", "February", "March", "April", "May", "June", 
+			let courses = db.get('courses');
+			courses.find({},{limit:6}, function(err,c){
+				var monthNames = [ "January", "February", "March", "April", "May", "June", 
                        "July", "August", "September", "October", "November", "December" ];
-			let data = {
-				pageName: 'Index',
-				months: monthNames,
-				latest_posts: posts,
-				categories: categories
-			};
-			res.render("frontend/index", data);
+				let data = {
+					pageName: 'Index',
+					months: monthNames,
+					latest_posts: posts,
+					categories: categories,
+					courses: c
+				};
+				res.render("frontend/index", data);
+			})
 		})
 	})
 	
