@@ -170,6 +170,7 @@ router.post('/post/update', upload.single('post_file'), function(req, res){
 	  		title: req.body.title,
 			category: req.body.category,
 			short_description: req.body.short_description,
+			external_link: req.body.external_link,
 			description: req.body.description,
 			tags: tags.split(','),
 			created_by: req.body.created_by,
