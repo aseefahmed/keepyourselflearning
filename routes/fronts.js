@@ -225,7 +225,6 @@ router.get('/courses/:category?', function(req, res){
 		res.render('frontend/courses', data);	
 		})
 	})
-	
 });
 
 router.get('/grid/courses/:category?', function(req, res){
