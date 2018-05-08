@@ -69,7 +69,7 @@
 									<% if(i>20){%>
 										<% continue %>
 									<% }else{ %>
-										<li class="page-item " style="list-style-image: none"><a class="page-link" <% if(i==page_number){%>style="color:black;"<%} %> href="/blog/<%= i %>"><%= i %></a></li>
+										<li class="page-item " style="list-style-image: none"><a class="page-link" <% if(i==page_number){%>style="color:black;"<%} %> <% if(i!=page_number){%> href="/blog/<%= i %>"<%} %>><%= i %></a></li>
 									<% } %>
 								
 								<% } %>
