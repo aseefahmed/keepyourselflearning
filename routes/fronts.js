@@ -389,12 +389,12 @@ router.post('/register', function(req, res){
 
 
 
-/*router.post('/login',
+router.post('/login',
   passport.authenticate('local',{failureRedirect:'/login', failureFlash: 'Invalid username or password'}),
   function(req, res) {
    req.flash('success', 'You are now logged in');
    res.redirect('/dashboard');
-});*/
+});
 
 
 
