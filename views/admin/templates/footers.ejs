@@ -45,7 +45,7 @@
     <% if(pageName == 'New Post' || pageName == 'Edit Details') { %>
     <script src="/js/textcounter.min.js"></script>
     <script src="/vendor/selectize/js/standalone/selectize.js"></script>
-    <script src="https://cdn.ckeditor.com/4.8.0/standard-all/ckeditor.js"></script>
+    <script src="/vendor/ckeditor/ckeditor.js"></script>
     <script>
       CKEDITOR.replace( 'editor', {
         // Define the toolbar: http://docs.ckeditor.com/ckeditor4/docs/#!/guide/dev_toolbar
@@ -76,7 +76,7 @@
         // filebrowserUploadUrl: 'http://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
         /*********************** File management support ***********************/
         // Remove the default image plugin because image2, which offers captions for images, was enabled above.
-        removePlugins: 'image',
+        removePlugins: 'image2,autoembed,bootstrapTable,embedsemantic',
         // Make the editing area bigger than default.
         height: 600,
         // An array of stylesheets to style the WYSIWYG area.

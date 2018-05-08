@@ -109,6 +109,13 @@
 				<!-- /aside -->
 
 				<div class="col-lg-9" id="list_sidebar">
+					<% if(courses.length == 0){ %>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+								  <a style="color:darkred;">No Courses Found</a>
+								</li>
+							</ol>
+					<% } %>
 					<% courses.forEach(function(c){ %>
 					<div class="box_list wow">
 						<div class="row no-gutters">
