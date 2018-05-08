@@ -89,7 +89,7 @@ router.get('/blog/:page?', function(req, res){
 
 	let limit_data = 10;
 	if(typeof req.params.page == 'undefined'){
-		var page = 0;
+		var page = 1;
 		var offset_data = 0;
 	}else{
 		var offset_data = (req.params.page-1)*limit_data;
