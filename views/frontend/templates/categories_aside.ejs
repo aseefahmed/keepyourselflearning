@@ -4,7 +4,7 @@
 	</div>
 	<ul class="cats">
 		<% categories.forEach(function(category){ %>
-			<li><a href="/blog/category/<%= category.name %>"><%= category.name.toUpperCase() %> <!--span>(12)</span--></a></li>
+			<li style="list-style-image: none"><a href="/blog/category/<%= category.name %>"><%= category.name.toUpperCase() %> <!--span>(12)</span--></a></li>
 		<% }) %>
 	</ul>
 </div>

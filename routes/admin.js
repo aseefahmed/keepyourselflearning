@@ -4,10 +4,11 @@ var db = require('monk')('localhost/lms');
 var flash = require('connect-flash');
 var multer = require('multer');
 var upload = multer({ dest: './public/img/uploads' })
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 
 router.use(flash());
 
-router.get('/dashboard', ensureAuthenticated, function(req, res, next) {
+router.get('/dashboard', ensureLoggedIn, function(req, res, next) {
   let posts = db.get('posts');
   let total_posts = posts.count({},{}, function(err,count_posts){
 
@@ -23,20 +24,20 @@ router.get('/dashboard', ensureAuthenticated, function(req, res, next) {
   
 });
 
-function ensureAuthenticated(req, res, next){
+/*function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
 	}
 	res.redirect('/login');
 };
-
+*/
 router.get('/logout', function(req, res){
 	req.logout();
 	req.flash('success', 'You are now logged out');
   	res.redirect('/login');
 });
 
-router.get('/posts', function(req, res){
+router.get('/posts',ensureLoggedIn, function(req, res){
 	let posts = db.get('posts');
 	
 	posts.find({}, {sort:{updated_at:-1}}, function(err, posts){
@@ -48,7 +49,7 @@ router.get('/posts', function(req, res){
 	
 });
 
-router.get('/categories', function(req, res){
+router.get('/categories',ensureLoggedIn, function(req, res){
 	var categories = db.get('categories');
 	categories.find({},{}, function(err, categories){
 		let data = { pageName: 'Categories', categories: categories }
@@ -57,7 +58,7 @@ router.get('/categories', function(req, res){
 	
 });
 
-router.get('/post/add', function(req, res){
+router.get('/post/add', ensureLoggedIn, function(req, res){
 	let categories = db.get('categories');
 	categories.find({},{}, function(err, categories){
 		let data = { 
@@ -71,7 +72,7 @@ router.get('/post/add', function(req, res){
 	
 });
 
-router.post('/comment/delete', function(req, res){
+router.post('/comment/delete',ensureLoggedIn, function(req, res){
 		
 		let post = db.get('posts');
 		post.update(
@@ -90,7 +91,7 @@ router.post('/comment/delete', function(req, res){
 		
 });
 
-router.get('/post/edit/:id', function(req, res){
+router.get('/post/edit/:id',ensureLoggedIn, function(req, res){
 	let posts = db.get('posts');
 	posts.find({_id: req.params.id}, {},function(err, post){
 		let categories = db.get('categories');
@@ -111,7 +112,7 @@ router.get('/post/edit/:id', function(req, res){
 	
 });
 
-router.post('/category/submit', function(req, res){
+router.post('/category/submit', ensureLoggedIn, function(req, res){
 	req.checkBody('category_name', "Name is required").notEmpty();
 	var errors = req.validationErrors();
 	if(errors){
@@ -135,7 +136,7 @@ router.post('/category/submit', function(req, res){
 
 
 
-router.post('/post/delete', function(req, res){
+router.post('/post/delete', ensureLoggedIn, function(req, res){
 	var posts = db.get('posts');
 	posts.remove({_id: req.body.deletable_post_id});
 	res.redirect('/posts');
@@ -232,7 +233,7 @@ router.post('/post/submit', upload.single('post_file'), function(req, res){
 	}
 });
 
-router.get('/category/add', function(req, res){
+router.get('/category/add', ensureLoggedIn, function(req, res){
 	let data = { pageName: 'New Category' }
 	res.render('admin/new_categories_form', data);
 });

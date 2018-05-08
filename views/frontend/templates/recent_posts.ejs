@@ -12,7 +12,7 @@
 	</div>
 	<ul class="comments-list">
 		<% recents.forEach(function(recent){ %>
-				<li>
+				<li style="list-style-image: none">
 					<div class="alignleft">
 						<a title="<%= recent.title %>" target="_blank" href="<% if(typeof recent.external_link == 'undefined' || recent.external_link == ""){%>/post/get/<%= recent._id %><%}else{%><%= recent.external_link %><%} %>"><img src="/img/uploads/<%= recent.image %>" alt="<%= recent.title %>"></a>
 					</div>
@@ -29,7 +29,7 @@
 	</div>
 	<ul class="comments-list">
 		<% popular_posts.forEach(function(pop){ %>
-				<li>
+				<li style="list-style-image: none">
 					<div class="alignleft">
 						<a href="/post/get/<%= pop._id %>" title="<%= pop.title %>"><img src="/img/uploads/<%= pop.image %>" alt="<%= pop.title %>"></a>
 					</div>

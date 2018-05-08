@@ -6,17 +6,30 @@ var passport = require('passport');
 var db = require('monk')('localhost/lms');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
+var dotenv = require('dotenv');
 var User = require('../models/user');
 var router = express.Router();
 
+
 const Auth0Strategy = require('passport-auth0').Strategy;
+
+/*const env = {
+  AUTH0_CLIENT_ID: 'gq3E3762SZFm5a7EeJRhTGjQ8uR6x7PP',
+  AUTH0_SECRET_KEY: 'G2qtiMFCWQA6Gg15vv-L6IJ7XHzeeqmb6PHyTHaOU96N0a6e5q3ba0Vn7eIOLDQ6',
+  AUTH0_DOMAIN: 'keepyourselflearning.auth0.com',
+  AUTH0_CALLBACK_URL: 'http://localhost:3000/callback'
+};*/
+
+
+
+dotenv.load(); 
 
 const strategy = new Auth0Strategy(
   {
-    domain: 'aseef.auth0.com',
-    clientID: 'yIO6iBTy_p8P-AxYLgquzY16vnRpZY2U',
-    clientSecret: 'YOUR_CLIENT_SECRET',
-    callbackURL: 'http://localhost:3000/callback'
+    domain: process.env.AUTH0_DOMAIN,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    clientSecret: process.env.AUTH0_SECRET_KEY,
+    callbackURL: process.env.AUTH0_CALLBACK_URL
   },
   (accessToken, refreshToken, extraParams, profile, done) => {
     return done(null, profile);
@@ -35,20 +48,6 @@ router.use(session({ cookie: { maxAge: 60000 },
                   saveUninitialized: false}));
 router.use(passport.initialize());
 router.use(passport.session());
-
-
-////////////Auth0 Authentication //////////////////////
-const env = {
-  AUTH0_CLIENT_ID: 'kiaH232ELpr4mwdNJKlQqwrKi3to5LiY',
-  AUTH0_DOMAIN: 'aseef.auth0.com',
-  AUTH0_CALLBACK_URL: 'http://localhost:3000/callback'
-};
-
-
-
-////////////Auth0 Authentication //////////////////////
-
-
 
 
 router.get('/', function(req, res){
@@ -313,25 +312,26 @@ router.get('/grid/courses/:category?', function(req, res){
 	
 });
 
-/*router.get('/login', function(req, res){
+router.get('/login1', function(req, res){
 	let data = {pageName: 'Login'};
 	res.render('frontend/login', data);
-});*/
+});
 
 router.get(
   '/login',
   passport.authenticate('auth0', {
-    clientID: env.AUTH0_CLIENT_ID,
-    domain: env.AUTH0_DOMAIN,
-    redirectUri: env.AUTH0_CALLBACK_URL,
-    audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
+    clientID: process.env.AUTH0_CLIENT_ID,
+    domain: process.env.AUTH0_DOMAIN,
+    redirectUri: process.env.AUTH0_CALLBACK_URL,
+    audience: 'https://' + process.env.AUTH0_DOMAIN + '/userinfo',
     responseType: 'code',
-    scope: 'openid'
+    scope: 'openid profile'
   }),
   function(req, res) {
     res.redirect('/');
   }
 );
+
 
 
 // Perform session logout and redirect to homepage
@@ -343,19 +343,21 @@ router.get('/logout', (req, res) => {
 router.get(
   '/callback',
   passport.authenticate('auth0', {
-    failureRedirect: '/'
+    failureRedirect: '/no'
   }),
   function(req, res) {
-    res.redirect(req.session.returnTo || '/');
+  	res.send(profile)
+    res.redirect(req.session.returnTo ||'/dashboard');
   }
 );
+
 
 router.get('/register', function(req, res){
 	let data = {pageName: 'Register'};
 	res.render('frontend/register', data);
 });
 
-router.get('/contact', function(req, res){
+router.get('/ ntact', function(req, res){
 	let data = {pageName: 'Contact'};
 	res.render('frontend/contact', data);
 });
@@ -394,29 +396,15 @@ router.post('/register', function(req, res){
    res.redirect('/dashboard');
 });*/
 
-router.get(
-  '/login',
-  passport.authenticate('auth0', {
-    clientID: env.AUTH0_CLIENT_ID,
-    domain: env.AUTH0_DOMAIN,
-    redirectUri: env.AUTH0_CALLBACK_URL,
-    audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
-    responseType: 'code',
-    scope: 'openid'
-  }),
-  function(req, res) {
-    res.redirect('/');
-  }
-);
 
+
+// you can use this section to keep a smaller payload
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.getUserById(id, function(err, user) {
-    done(err, user);
-  });
+passport.deserializeUser(function(user, done) {
+  done(null, user);
 });
 
 passport.use(new LocalStrategy(function(username, password, done){

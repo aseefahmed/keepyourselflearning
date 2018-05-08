@@ -4,10 +4,12 @@ var db = require('monk')('localhost/lms');
 var flash = require('connect-flash');
 var multer = require('multer');
 var upload = multer({ dest: './public/img/courses/uploads' })
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+
 
 router.use(flash());
 
-router.get('/admin/course/categories', function(req, res){
+router.get('/admin/course/categories', ensureLoggedIn, function(req, res){
 	var categories = db.get('course_categories');
 	categories.find({},{}, function(err, categories){
 		let data = { pageName: 'Course Categories', parentPageName: 'Courses', parentPageRoute:'/admin/courses', categories: categories }
@@ -16,7 +18,7 @@ router.get('/admin/course/categories', function(req, res){
 	
 });
 
-router.get('/course/get/:id', function(req, res){
+router.get('/course/get/:id', ensureLoggedIn, function(req, res){
 	let course = db.get('courses');
 	course.find({_id: req.params.id},{},function(err,course){
 		let data = {
@@ -29,7 +31,7 @@ router.get('/course/get/:id', function(req, res){
 	
 });
 
-router.get('/admin/course/category/add', function(req, res){
+router.get('/admin/course/category/add', ensureLoggedIn, function(req, res){
 	let data = { pageName: 'New Category', parentPageName: 'Courses', parentPageRoute:'/admin/courses' }
 	res.render('admin/courses/new_categories_form', data);
 });
@@ -75,7 +77,7 @@ router.post('/admin/course/category/submit', upload.single('post_file'), functio
 	}
 });
 
-router.get('/admin/courses', function(req, res){
+router.get('/admin/courses', ensureLoggedIn, function(req, res){
 	var courses = db.get('courses');
 	courses.find({},{}, function(err, course){
 		let data = { pageName: 'Courses', courses: course }
@@ -84,7 +86,7 @@ router.get('/admin/courses', function(req, res){
 	
 });
 
-router.get('/admin/course/add', function(req, res){
+router.get('/admin/course/add', ensureLoggedIn, function(req, res){
 	let categories = db.get('course_categories');
 	categories.find({},{}, function(err, categories){
 		let data = { 
@@ -144,7 +146,7 @@ router.post('/admin/course/update', upload.single('post_file'), function(req, re
 	
 });
 
-router.get('/admin/course/edit/:id', function(req, res){
+router.get('/admin/course/edit/:id', ensureLoggedIn, function(req, res){
 
 	let course = db.get('courses');
 	course.find({_id: req.params.id}, {},function(err, course){
@@ -163,14 +165,14 @@ router.get('/admin/course/edit/:id', function(req, res){
 	
 });
 
-router.post('/admin/course/delete', function(req, res){
+router.post('/admin/course/delete', ensureLoggedIn, function(req, res){
 
 	var course = db.get('courses');
 	course.remove({_id: req.body.deletable_course_id});
 	res.redirect('/admin/courses');
 });
 
-router.post('/admin/course/outcome/delete', function(req, res){
+router.post('/admin/course/outcome/delete', ensureLoggedIn, function(req, res){
 	
 		let course = db.get('courses');
 		course.update(
@@ -181,7 +183,7 @@ router.post('/admin/course/outcome/delete', function(req, res){
 		res.redirect('/admin/course/edit/'+req.body.course_id);		
 });
 
-router.post('/admin/course/lesson/delete', function(req, res){
+router.post('/admin/course/lesson/delete', ensureLoggedIn, function(req, res){
 	
 		let course = db.get('courses');
 		course.update(
@@ -192,7 +194,7 @@ router.post('/admin/course/lesson/delete', function(req, res){
 		res.redirect('/admin/course/edit/'+req.body.course_id);		
 });
 
-router.post('/admin/course/outcomes/submit', function(req, res){
+router.post('/admin/course/outcomes/submit', ensureLoggedIn, function(req, res){
 
 	 let course = db.get('courses');
 	 let json = {
@@ -205,7 +207,7 @@ router.post('/admin/course/outcomes/submit', function(req, res){
 	 res.send(req.body)
 });
 
-router.post('/admin/course/lesson/submit', function(req, res){
+router.post('/admin/course/lesson/submit', ensureLoggedIn, function(req, res){
 
 	 let course = db.get('courses');
 	 let json = {
