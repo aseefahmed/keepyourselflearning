@@ -9,6 +9,22 @@ var session = require('express-session');
 var User = require('../models/user');
 var router = express.Router();
 
+const Auth0Strategy = require('passport-auth0').Strategy;
+
+const strategy = new Auth0Strategy(
+  {
+    domain: 'aseef.auth0.com',
+    clientID: 'yIO6iBTy_p8P-AxYLgquzY16vnRpZY2U',
+    clientSecret: 'YOUR_CLIENT_SECRET',
+    callbackURL: 'http://localhost:3000/callback'
+  },
+  (accessToken, refreshToken, extraParams, profile, done) => {
+    return done(null, profile);
+  }
+);
+
+passport.use(strategy);
+
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(validator())
@@ -19,6 +35,21 @@ router.use(session({ cookie: { maxAge: 60000 },
                   saveUninitialized: false}));
 router.use(passport.initialize());
 router.use(passport.session());
+
+
+////////////Auth0 Authentication //////////////////////
+const env = {
+  AUTH0_CLIENT_ID: 'kiaH232ELpr4mwdNJKlQqwrKi3to5LiY',
+  AUTH0_DOMAIN: 'aseef.auth0.com',
+  AUTH0_CALLBACK_URL: 'http://localhost:3000/callback'
+};
+
+
+
+////////////Auth0 Authentication //////////////////////
+
+
+
 
 router.get('/', function(req, res){
 	
@@ -46,10 +77,34 @@ router.get('/', function(req, res){
 	
 });
 
-router.get('/blog', function(req, res){
-	let posts = db.get('posts');
+router.get('/public', function(req, res){
+	res.send('done')
+});
 
-	posts.find({}, {sort: {created_at: -1}}, function(err, posts){
+router.get('/private', function(req, res){
+	res.send('denied');
+})
+
+router.get('/blog/:page?', function(req, res){
+
+	let limit_data = 10;
+	if(typeof req.params.page == 'undefined'){
+		var page = 0;
+		var offset_data = 0;
+	}else{
+		var offset_data = (req.params.page-1)*limit_data;
+		var page = req.params.page;
+	}
+
+	let option = {
+		limit:limit_data,
+		skip: offset_data,
+		sort: {created_at: -1}
+	}
+
+	let posts = db.get('posts');
+		
+	posts.find({}, option, function(err, posts){
 		let recent_posts = db.get('posts');
 		recent_posts.find({},{limit: 3, sort: {created_at: -1}}, function(err, recents){
 
@@ -57,15 +112,20 @@ router.get('/blog', function(req, res){
 			categories.find({}, {}, function(err, categories){
 				let popular_posts = db.get('posts');
 				popular_posts.find({},{limit: 3, sort: {no_of_views: -1}},function(err, pop_posts){
-					let data = {
+					let post_count = db.get('posts');
+					post_count.count({}, function(err,post_count){
+						let data = {
 							pageName: 'Blog', 
 							posts: posts, 
 							recents: recents,
 							recents: recents,
 							popular_posts: pop_posts,
-							categories: categories
+							categories: categories,
+							page_number: page,
+							post_count: Math.ceil(post_count/limit_data)
 						};
-					res.render('frontend/blog', data);
+						res.render('frontend/blog', data);
+					})
 				});
 			})
 
@@ -253,10 +313,42 @@ router.get('/grid/courses/:category?', function(req, res){
 	
 });
 
-router.get('/login', function(req, res){
+/*router.get('/login', function(req, res){
 	let data = {pageName: 'Login'};
 	res.render('frontend/login', data);
+});*/
+
+router.get(
+  '/login',
+  passport.authenticate('auth0', {
+    clientID: env.AUTH0_CLIENT_ID,
+    domain: env.AUTH0_DOMAIN,
+    redirectUri: env.AUTH0_CALLBACK_URL,
+    audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
+    responseType: 'code',
+    scope: 'openid'
+  }),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
+
+
+// Perform session logout and redirect to homepage
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
+
+router.get(
+  '/callback',
+  passport.authenticate('auth0', {
+    failureRedirect: '/'
+  }),
+  function(req, res) {
+    res.redirect(req.session.returnTo || '/');
+  }
+);
 
 router.get('/register', function(req, res){
 	let data = {pageName: 'Register'};
@@ -294,12 +386,28 @@ router.post('/register', function(req, res){
 });
 
 
-router.post('/login',
+
+/*router.post('/login',
   passport.authenticate('local',{failureRedirect:'/login', failureFlash: 'Invalid username or password'}),
   function(req, res) {
    req.flash('success', 'You are now logged in');
    res.redirect('/dashboard');
-});
+});*/
+
+router.get(
+  '/login',
+  passport.authenticate('auth0', {
+    clientID: env.AUTH0_CLIENT_ID,
+    domain: env.AUTH0_DOMAIN,
+    redirectUri: env.AUTH0_CALLBACK_URL,
+    audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
+    responseType: 'code',
+    scope: 'openid'
+  }),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
 
 passport.serializeUser(function(user, done) {
   done(null, user);

@@ -43,7 +43,7 @@
 										<p class="text-left"><%= post.short_description.substring(0,130) %>. . .</p>
 										<ul>
 											<li>
-												<div class="thumb"><img src="/img/uploads/<%= post.image %>" alt=""></div> <%= post.created_by %>
+												<div class="thumb"><img src="/img/photo.jpg" alt=""></div> <%= post.created_by %>
 											</li>
 											<li><% if(typeof post.external_link == 'undefined' || post.external_link == ""){ %>
 												<i class="icon_comment_alt"></i> <% if(typeof post.comments == 'undefined'){%>0<% }else{%><%= post.comments.length %><% } %>
@@ -56,19 +56,32 @@
 							</div>
 						</article>
 						<% }) %>
-						<!--nav aria-label="...">
+						<nav aria-label="...">
 							<ul class="pagination pagination-sm">
-								<li class="page-item disabled">
-									<a class="page-link" href="#" tabindex="-1">Previous</a>
+								<li class="page-item <% if(page_number==1){%>disabled<%}%>" style="list-style-image: none">
+									<% if(page_number==1){ %>
+										<a class="page-link" href="#" tabindex="-1">Previous</a>
+									<%}else{%>
+										<a class="page-link"  href="/blog/<%= page_number-1 %>" tabindex="-1">Previous</a>
+									<%}%>
 								</li>
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item">
-									<a class="page-link" href="#">Next</a>
+								<% for(i=1;i<=post_count;i++){ %>
+									<% if(i>20){%>
+										<% continue %>
+									<% }else{ %>
+										<li class="page-item " style="list-style-image: none"><a class="page-link" <% if(i==page_number){%>style="color:black;"<%} %> href="/blog/<%= i %>"><%= i %></a></li>
+									<% } %>
+								
+								<% } %>
+								<li class="page-item <% if(page_number==post_count){%>disabled<%}%>"" style="list-style-image: none">
+									<% if(page_number==post_count){ %>
+										<a class="page-link" href="#" tabindex="-1">Next</a>
+									<%}else{%>
+										<a class="page-link"  href="/blog/<%= parseInt(page_number)+1 %>" tabindex="-1">Next</a>
+									<%}%>
 								</li>
 							</ul>
-						</nav-->
+						</nav>
 						<!-- /pagination -->
 					<% } %>
 					
