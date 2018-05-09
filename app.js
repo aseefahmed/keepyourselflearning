@@ -14,12 +14,6 @@ var dotenv = require('dotenv').load();
 var compression = require('compression'); 
 var compressor = require('node-minify');
 
-compressor.minify({
-  compressor: 'uglifyjs',
-  input: './**/*.css',
-  output: 'stylesheet.css',
-  callback: function (err, min) {}
-});
 
 
 

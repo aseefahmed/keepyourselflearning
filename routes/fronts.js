@@ -13,13 +13,6 @@ var router = express.Router();
 
 const Auth0Strategy = require('passport-auth0').Strategy;
 
-/*const env = {
-  AUTH0_CLIENT_ID: 'gq3E3762SZFm5a7EeJRhTGjQ8uR6x7PP',
-  AUTH0_SECRET_KEY: 'G2qtiMFCWQA6Gg15vv-L6IJ7XHzeeqmb6PHyTHaOU96N0a6e5q3ba0Vn7eIOLDQ6',
-  AUTH0_DOMAIN: 'keepyourselflearning.auth0.com',
-  AUTH0_CALLBACK_URL: 'http://localhost:3000/callback'
-};*/
-
 
 
 dotenv.load(); 

@@ -13,12 +13,13 @@ var mongo = require('mongodb');
 var io = require('socket.io')();
 var os = require('os')
 var dotenv = require('dotenv');
+
 var app = express();
 app.locals.moment = require('moment');
 
-dotenv.load();
 var db = require('monk')('localhost/lms');
 
+dotenv.load(); 
 const port = process.env.PORT;
 app.use(require('./routes/fronts'));
 app.use(require('./routes/admin'));
@@ -64,3 +65,4 @@ io.on('connection', function(socket){
     io.emit('updateMessage', data);
   })
 })
+
