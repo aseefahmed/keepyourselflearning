@@ -10,7 +10,7 @@ var moment = require('moment');
 var flash = require('connect-flash');
 var expressValidator = require('express-validator');
 var mongo = require('mongodb');
-var io = require('socket.io')();
+
 var os = require('os')
 var dotenv = require('dotenv');
 
@@ -57,12 +57,4 @@ var server = app.listen(port, function(){
   
 });
 
-io.attach(server);
-
-io.on('connection', function(socket){
-  console.log('user connected');
-  socket.on('postMessage', function(data){
-    io.emit('updateMessage', data);
-  })
-})
 
