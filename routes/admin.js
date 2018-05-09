@@ -8,7 +8,7 @@ var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 
 router.use(flash());
 
-router.get('/dashboard', ensureLoggedIn, function(req, res, next) {
+router.get('/dashboard',  function(req, res, next) {
   let posts = db.get('posts');
   let total_posts = posts.count({},{}, function(err,count_posts){
 
