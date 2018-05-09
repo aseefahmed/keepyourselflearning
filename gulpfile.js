@@ -11,9 +11,9 @@ gulp.task('minify-css', function () {
     	'public/css/bootstrap.min.css',
     	'public/css/style.css',
     	'public/css/vendors.css',
-    	'/css/icon_fonts/css/all_icons.min.css',
-    	'/vendor/prism/prism.css',
-    	'/css/blog.css'
+    	'public/css/icon_fonts/css/all_icons.min.css',
+    	'public/vendor/prism/prism.css',
+    	'public/css/blog.css'
     	])
     .pipe(concat('styles.css'))
     .pipe(minifyCss())
