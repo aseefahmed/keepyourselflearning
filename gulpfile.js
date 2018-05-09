@@ -25,8 +25,8 @@ gulp.task('minify-js', function() {
 
   gulp.src([
   	'public/js/jquery-2.2.4.min.js',
-  	'public/js/main.js',
   	'public/js/common_scripts.js',
+  	'public/js/main.js',
   	'public/vendor/prism/prism.js',
   	'public/assets/validate.js',
   	])
