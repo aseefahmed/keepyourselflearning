@@ -12,13 +12,14 @@ var expressValidator = require('express-validator');
 var mongo = require('mongodb');
 var io = require('socket.io')();
 var os = require('os')
-
+var dotenv = require('dotenv');
 var app = express();
 app.locals.moment = require('moment');
 
+dotenv.load();
 var db = require('monk')('localhost/lms');
 
-const port = 3000;
+const port = process.env.PORT;
 app.use(require('./routes/fronts'));
 app.use(require('./routes/admin'));
 app.use(require('./routes/chatio'));
