@@ -149,7 +149,6 @@ router.post('/post/update', upload.single('post_file'), function(req, res){
 	
 	// Check Errors
 	var errors = req.validationErrors();
-
 	if(req.file){
 	  	/*var random = Math.ceil(Math.random()*10000000000);
 	  	filename = random+"_"+req.file.originalname;*/
@@ -159,6 +158,7 @@ router.post('/post/update', upload.single('post_file'), function(req, res){
 			category: req.body.category,
 			short_description: req.body.short_description,
 			external_link: req.body.external_link,
+			external_author: req.body.external_author,
 			description: req.body.description,
 			tags: tags.split(','),
 			image: mainimage,
@@ -172,6 +172,7 @@ router.post('/post/update', upload.single('post_file'), function(req, res){
 			category: req.body.category,
 			short_description: req.body.short_description,
 			external_link: req.body.external_link,
+			external_author: req.body.external_author,
 			description: req.body.description,
 			tags: tags.split(','),
 			created_by: req.body.created_by,
@@ -213,6 +214,7 @@ router.post('/post/submit', upload.single('post_file'), function(req, res){
 			category: req.body.category,
 			short_description: req.body.short_description,
 			external_link: req.body.external_link,
+			external_author: req.body.external_author,
 			description: req.body.description,
 			tags: tags.split(','),
 			image: mainimage,

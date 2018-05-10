@@ -43,12 +43,16 @@
 										<p class="text-left"><%= post.short_description.substring(0,130) %></p>
 										<ul>
 											<li>
-												<div class="thumb"><img src="/img/photo.jpg" alt=""></div> <%= post.created_by %>
+												<% if(post.external_link==""){ %>
+														<div class="thumb"><img src="/img/photo.jpg" alt=""></div> <%= post.created_by %>
+												<% }else { %>
+														<div class="thumb"><img src="/img/avatar.png" alt=""></div> <%= post.external_author %>
+												<% } %>
 											</li>
 											<li><% if(typeof post.external_link == 'undefined' || post.external_link == ""){ %>
 												<i class="icon_comment_alt"></i> <% if(typeof post.comments == 'undefined'){%>0<% }else{%><%= post.comments.length %><% } %>
 											<% }else{ %> 
-												<i class="text-danger icon-link-ext"></i> 
+												<a href="<%= post.external_link %>" target="_blank"><i class="text-danger icon-link-ext"></i> </a>
 											<% } %></li>
 										</ul>
 									</div>
