@@ -18,7 +18,7 @@
 		<div class="filters_listing sticky_horizontal">
 			<div class="container">
 				<ul class="clearfix">
-					<li>
+					<li style="list-style-image: none">
 						<div class="switch-field">
 							<input type="radio" id="all" name="listing_filter" value="all" checked>
 							<label for="all">All</label>
@@ -28,13 +28,13 @@
 							<label for="latest">Latest</label>
 						</div>
 					</li>
-					<li>
+					<li style="list-style-image: none">
 						<div class="layout_view">
 							<a href="/grid/courses"><i class="icon-th"></i></a>
 							<a href="#0" class="active"><i class="icon-th-list"></i></a>
 						</div>
 					</li>
-					<li>
+					<li style="list-style-image: none">
 						<select name="orderby" class="selectbox" id="choose_cat_btn">
 							<option value="category">Category</option>
 							<% categories.forEach(function(cat){ %>
@@ -57,7 +57,7 @@
 								<h6>Category</h6>
 								<ul>
 									<% categories.forEach(function(cat){%>
-									<li>
+									<li style="list-style-image: none">
 										<label>
 											<input type="checkbox" class="icheck"><%= cat.name.toUpperCase() %> <!--small>(45)</small-->
 										</label>
@@ -69,31 +69,31 @@
 							<div class="filter_type">
 								<h6>Rating</h6>
 								<ul>
-									<li>
+									<li style="list-style-image: none">
 										<label>
 											<input type="checkbox" class="icheck">
 											<span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i> <small>(145)</small></span>
 										</label>
 									</li>
-									<li>
+									<li style="list-style-image: none">
 										<label>
 											<input type="checkbox" class="icheck">
 											<span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> <small>(25)</small></span>
 										</label>
 									</li>
-									<li>
+									<li style="list-style-image: none">
 										<label>
 											<input type="checkbox" class="icheck">
 											<span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(68)</small></span>
 										</label>
 									</li>
-									<li>
+									<li style="list-style-image: none">
 										<label>
 											<input type="checkbox" class="icheck">
 											<span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(34)</small></span>
 										</label>
 									</li>
-									<li>
+									<li style="list-style-image: none">
 										<label>
 											<input type="checkbox" class="icheck">
 											<span class="rating"><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(10)</small></span>

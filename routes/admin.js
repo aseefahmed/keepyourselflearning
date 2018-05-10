@@ -37,7 +37,7 @@ router.get('/logout', function(req, res){
   	res.redirect('/login');
 });
 
-router.get('/posts',ensureLoggedIn, function(req, res){
+router.get('/posts', function(req, res){
 	let posts = db.get('posts');
 	
 	posts.find({}, {sort:{updated_at:-1}}, function(err, posts){
@@ -49,7 +49,7 @@ router.get('/posts',ensureLoggedIn, function(req, res){
 	
 });
 
-router.get('/categories',ensureLoggedIn, function(req, res){
+router.get('/categories', function(req, res){
 	var categories = db.get('categories');
 	categories.find({},{}, function(err, categories){
 		let data = { pageName: 'Categories', categories: categories }
@@ -72,7 +72,7 @@ router.get('/post/add', ensureLoggedIn, function(req, res){
 	
 });
 
-router.post('/comment/delete',ensureLoggedIn, function(req, res){
+router.post('/comment/delete', function(req, res){
 		
 		let post = db.get('posts');
 		post.update(
@@ -91,7 +91,7 @@ router.post('/comment/delete',ensureLoggedIn, function(req, res){
 		
 });
 
-router.get('/post/edit/:id',ensureLoggedIn, function(req, res){
+router.get('/post/edit/:id', function(req, res){
 	let posts = db.get('posts');
 	posts.find({_id: req.params.id}, {},function(err, post){
 		let categories = db.get('categories');
