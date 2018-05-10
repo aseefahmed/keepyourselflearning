@@ -58,7 +58,7 @@ router.get('/categories', function(req, res){
 	
 });
 
-router.get('/post/add', ensureLoggedIn, function(req, res){
+router.get('/post/add',  function(req, res){
 	let categories = db.get('categories');
 	categories.find({},{}, function(err, categories){
 		let data = { 
@@ -112,7 +112,7 @@ router.get('/post/edit/:id', function(req, res){
 	
 });
 
-router.post('/category/submit', ensureLoggedIn, function(req, res){
+router.post('/category/submit',  function(req, res){
 	req.checkBody('category_name', "Name is required").notEmpty();
 	var errors = req.validationErrors();
 	if(errors){
@@ -136,7 +136,7 @@ router.post('/category/submit', ensureLoggedIn, function(req, res){
 
 
 
-router.post('/post/delete', ensureLoggedIn, function(req, res){
+router.post('/post/delete',  function(req, res){
 	var posts = db.get('posts');
 	posts.remove({_id: req.body.deletable_post_id});
 	res.redirect('/posts');
@@ -233,7 +233,7 @@ router.post('/post/submit', upload.single('post_file'), function(req, res){
 	}
 });
 
-router.get('/category/add', ensureLoggedIn, function(req, res){
+router.get('/category/add', function(req, res){
 	let data = { pageName: 'New Category' }
 	res.render('admin/new_categories_form', data);
 });
