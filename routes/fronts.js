@@ -98,12 +98,12 @@ router.get('/blog/:page?', function(req, res){
 		
 	posts.find({}, option, function(err, posts){
 		let recent_posts = db.get('posts');
-		recent_posts.find({},{limit: 3, sort: {created_at: -1}}, function(err, recents){
+		recent_posts.find({},{limit: 5, sort: {created_at: -1}}, function(err, recents){
 
 			let categories = db.get('categories');
 			categories.find({}, {}, function(err, categories){
 				let popular_posts = db.get('posts');
-				popular_posts.find({},{limit: 3, sort: {no_of_views: -1}},function(err, pop_posts){
+				popular_posts.find({},{limit: 5, sort: {no_of_views: -1}},function(err, pop_posts){
 					let post_count = db.get('posts');
 					post_count.count({}, function(err,post_count){
 						let data = {
@@ -136,12 +136,12 @@ router.get('/search', function(req, res){
 
 	posts.find({description: {$regex:pattern}}, {sort: {created_at: -1}}, function(err, posts){
 		let recent_posts = db.get('posts');
-		recent_posts.find({},{limit: 3, sort: {created_at: -1}}, function(err, recents){
+		recent_posts.find({},{limit: 5, sort: {created_at: -1}}, function(err, recents){
 
 			let categories = db.get('categories');
 			categories.find({}, {}, function(err, categories){
 				let popular_posts = db.get('posts');
-				popular_posts.find({},{limit: 3, sort: {no_of_views: -1}},function(err, pop_posts){
+				popular_posts.find({},{limit: 5, sort: {no_of_views: -1}},function(err, pop_posts){
 					let data = {
 							pageName: 'Blog', 
 							posts: posts, 
@@ -176,12 +176,12 @@ router.get('/blog/category/:category', function(req, res){
 
 	posts.find({category: req.params.category}, {sort: {created_at: -1}}, function(err, posts){
 		let recent_posts = db.get('posts');
-		recent_posts.find({},{limit: 3, sort: {created_at: -1}}, function(err, recents){
+		recent_posts.find({},{limit: 5, sort: {created_at: -1}}, function(err, recents){
 
 			let categories = db.get('categories');
 			categories.find({}, {}, function(err, categories){
 				let popular_posts = db.get('posts');
-				popular_posts.find({},{limit: 3, sort: {no_of_views: -1}},function(err, pop_posts){
+				popular_posts.find({},{limit: 5, sort: {no_of_views: -1}},function(err, pop_posts){
 					let data = {
 							pageName: 'Blog', 
 							posts: posts, 
@@ -205,12 +205,12 @@ router.get('/blog/tag/:tag', function(req, res){
 
 	posts.find({tags: req.params.tag}, {sort: {created_at: -1}}, function(err, posts){
 		let recent_posts = db.get('posts');
-		recent_posts.find({},{limit: 3, sort: {created_at: -1}}, function(err, recents){
+		recent_posts.find({},{limit: 5, sort: {created_at: -1}}, function(err, recents){
 
 			let categories = db.get('categories');
 			categories.find({}, {}, function(err, categories){
 				let popular_posts = db.get('posts');
-				popular_posts.find({},{limit: 3, sort: {no_of_views: -1}},function(err, pop_posts){
+				popular_posts.find({},{limit: 5, sort: {no_of_views: -1}},function(err, pop_posts){
 					let data = {
 							pageName: 'Blog', 
 							posts: posts, 
@@ -233,7 +233,7 @@ router.get('/post/get/:id', function(req, res){
 	
 	posts.find({_id: req.params.id}, {},function(err, post){
 		let recent_posts = db.get('posts');	
-		recent_posts.find({},{limit: 3, sort: {created_at: -1}}, function(err, recents){
+		recent_posts.find({},{limit: 5, sort: {created_at: -1}}, function(err, recents){
 			let categories = db.get('categories');
 			categories.find({}, {}, function(err, categories){
 				if(typeof post[0].no_of_views != "number"){
@@ -243,7 +243,7 @@ router.get('/post/get/:id', function(req, res){
 				}
 				posts.update({_id: req.params.id}, {$set: {no_of_views: views+1}});
 				let popular_posts = db.get('posts');
-				popular_posts.find({},{limit: 3, sort: {no_of_views: -1}},function(err, pop_posts){
+				popular_posts.find({},{limit: 5, sort: {no_of_views: -1}},function(err, pop_posts){
 					let data = {
 							pageName: 'Details', 
 							parentPageName: 'Blog', 
