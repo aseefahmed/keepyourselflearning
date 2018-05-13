@@ -171,10 +171,24 @@ router.post('/comment/submit', function(req, res){
 	res.send(req.body)
 });
 
-router.get('/blog/category/:category', function(req, res){
-	let posts = db.get('posts');
+router.get('/blog/category/:category/:page?', function(req, res){
+	let limit_data = 10;
+	if(typeof req.params.page == 'undefined'){
+		var page = 1;
+		var offset_data = 0;
+	}else{
+		var offset_data = (req.params.page-1)*limit_data;
+		var page = req.params.page;
+	}
 
-	posts.find({category: req.params.category}, {sort: {created_at: -1}}, function(err, posts){
+	let option = {
+		limit:limit_data,
+		skip: offset_data,
+		sort: {created_at: -1}
+	}
+
+	let posts = db.get('posts');
+	posts.find({category: req.params.category}, option, function(err, posts){
 		let recent_posts = db.get('posts');
 		recent_posts.find({},{limit: 5, sort: {created_at: -1}}, function(err, recents){
 
