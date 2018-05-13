@@ -381,7 +381,6 @@ router.get(
     failureRedirect: '/no'
   }),
   function(req, res) {
-  	res.send(profile)
     res.redirect(req.session.returnTo ||'/dashboard');
   }
 );
