@@ -201,7 +201,8 @@ router.get('/blog/category/:category/:page?', function(req, res){
 							posts: posts, 
 							recents: recents,
 							categories: categories,
-							popular_posts: pop_posts
+							popular_posts: pop_posts,
+							page_number: page,
 						};
 				res.render('frontend/blog', data);
 				});
