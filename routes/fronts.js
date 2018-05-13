@@ -196,15 +196,21 @@ router.get('/blog/category/:category/:page?', function(req, res){
 			categories.find({}, {}, function(err, categories){
 				let popular_posts = db.get('posts');
 				popular_posts.find({},{limit: 5, sort: {no_of_views: -1}},function(err, pop_posts){
-					let data = {
+					let post_count = db.get('posts');
+					post_count.count({category: req.params.category}, function(err,post_count){
+						
+						let data = {
 							pageName: 'Blog', 
 							posts: posts, 
 							recents: recents,
 							categories: categories,
 							popular_posts: pop_posts,
 							page_number: page,
+							post_count: Math.ceil(post_count/limit_data)
 						};
-				res.render('frontend/blog', data);
+					    res.render('frontend/blog', data);
+					})
+					
 				});
 				
 			})
