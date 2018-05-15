@@ -18,7 +18,7 @@ router.get('/admin/course/categories', ensureLoggedIn, function(req, res){
 	
 });
 
-router.get('/course/get/:id', ensureLoggedIn, function(req, res){
+router.get('/course/get/:id',  function(req, res){
 	let course = db.get('courses');
 	course.find({_id: req.params.id},{},function(err,course){
 		let data = {
