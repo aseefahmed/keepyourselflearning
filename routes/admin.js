@@ -142,7 +142,7 @@ router.post('/post/delete', ensureLoggedIn,  function(req, res){
 	res.redirect('/posts');
 });
 
-router.post('/post/update', ensureLoggedIn, upload.single('post_file'), function(req, res){
+router.post('/post/update',  upload.single('post_file'), function(req, res){
 	tags = req.body.input_tags[0].toLowerCase();
 	// Form Validation
 	req.checkBody('title','Title field is required').notEmpty();

@@ -360,7 +360,7 @@ router.get(
     redirectUri: process.env.AUTH0_CALLBACK_URL,
     audience: 'https://' + process.env.AUTH0_DOMAIN + '/userinfo',
     responseType: 'code',
-    scope: 'openid'
+    scope: 'openid profile email'
   }),
   function(req, res) {
     res.redirect('/');
