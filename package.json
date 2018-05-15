@@ -22,6 +22,7 @@
     "express-jwt-authz": "^1.0.0",
     "express-messages": "^1.0.1",
     "express-session": "^1.15.6",
+    "express-static": "^1.2.5",
     "express-validator": "^5.1.2",
     "gulp": "^3.9.1",
     "jwks-rsa": "^1.2.1",
@@ -40,7 +41,8 @@
     "reload": "^2.2.2",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.1.0",
-    "uglify-js": "^3.3.24"
+    "uglify-js": "^3.3.24",
+    "web-push": "^3.3.1"
   },
   "devDependencies": {
     "gulp-concat": "^2.6.1",
