@@ -9,7 +9,7 @@ var session = require('express-session');
 var dotenv = require('dotenv');
 var User = require('../models/user');
 var router = express.Router();
-
+const webpush = require('web-push');
 
 const Auth0Strategy = require('passport-auth0').Strategy;
 
@@ -430,7 +430,17 @@ router.post('/login',
    res.redirect('/dashboard');
 });
 
+router.post('/subscribe', (req, res) => {
+  const subscription = req.body;
+  res.status(201).json({});
+  const payload = JSON.stringify({ title: 'test' });
 
+  console.log(subscription);
+
+  webpush.sendNotification(subscription, payload).catch(error => {
+    console.error(error.stack);
+  });
+});
 
 // you can use this section to keep a smaller payload
 passport.serializeUser(function(user, done) {

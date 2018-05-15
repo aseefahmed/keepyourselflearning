@@ -10,6 +10,7 @@ var moment = require('moment');
 var flash = require('connect-flash');
 var expressValidator = require('express-validator');
 var mongo = require('mongodb');
+const webpush = require('web-push');
 
 var os = require('os')
 var dotenv = require('dotenv');
@@ -38,6 +39,10 @@ app.use(session({
     resave: true
 }));
 
+const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
+const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
+
+webpush.setVapidDetails('mailto:aseefahmed@gmail.com', publicVapidKey, privateVapidKey);
 
 app.use(flash());
 /*app.use(function(req, res, next){
