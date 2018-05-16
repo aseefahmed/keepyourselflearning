@@ -165,14 +165,14 @@ router.get('/admin/course/edit/:id', ensureLoggedIn, function(req, res){
 	
 });
 
-router.post('/admin/course/delete', ensureLoggedIn, function(req, res){
+router.post('/admin/course/delete',  function(req, res){
 
 	var course = db.get('courses');
 	course.remove({_id: req.body.deletable_course_id});
 	res.redirect('/admin/courses');
 });
 
-router.post('/admin/course/outcome/delete', ensureLoggedIn, function(req, res){
+router.post('/admin/course/outcome/delete', function(req, res){
 	
 		let course = db.get('courses');
 		course.update(
@@ -183,7 +183,7 @@ router.post('/admin/course/outcome/delete', ensureLoggedIn, function(req, res){
 		res.redirect('/admin/course/edit/'+req.body.course_id);		
 });
 
-router.post('/admin/course/lesson/delete', ensureLoggedIn, function(req, res){
+router.post('/admin/course/lesson/delete',  function(req, res){
 	
 		let course = db.get('courses');
 		course.update(
@@ -194,7 +194,7 @@ router.post('/admin/course/lesson/delete', ensureLoggedIn, function(req, res){
 		res.redirect('/admin/course/edit/'+req.body.course_id);		
 });
 
-router.post('/admin/course/outcomes/submit', ensureLoggedIn, function(req, res){
+router.post('/admin/course/outcomes/submit',  function(req, res){
 
 	 let course = db.get('courses');
 	 let json = {
@@ -207,7 +207,7 @@ router.post('/admin/course/outcomes/submit', ensureLoggedIn, function(req, res){
 	 res.send(req.body)
 });
 
-router.post('/admin/course/lesson/submit', ensureLoggedIn, function(req, res){
+router.post('/admin/course/lesson/submit', function(req, res){
 
 	 let course = db.get('courses');
 	 let json = {
