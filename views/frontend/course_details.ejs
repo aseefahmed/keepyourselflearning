@@ -32,7 +32,6 @@
 						<section id="description">
 							<h2>Description</h2>
 							<%- course[0].description %>
-							<% if(typeof course[0].learning_outcomes == 'undefined'){ %>
 							<h5>What You Will Learn</h5>
 							<ul class="list_ok">
 								<% course[0].learning_outcomes.forEach(function(outcome){ %>
@@ -42,7 +41,6 @@
 								<% }) %>
 								
 							</ul>
-							<% } %>
 							<!-- <hr>
 							<p>Mea appareat omittantur eloquentiam ad, nam ei quas oportere democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.</p>
 							<div class="row">
@@ -237,11 +235,11 @@
 							<div id="list_feat">
 								<h3>What's includes</h3>
 								<ul>
-									<li style="list-style-image: none"><i class="icon_mobile" style="list-style-image: none"></i>Video Lectures</li>
-									<li style="list-style-image: none"><i class="icon_archive style="list-style-image: none"_alt"></i>Online Assessments</li>
-									<li style="list-style-image: none"><i class="icon_mobile" style="list-style-image: none"></i>Quizzes</li>
-									<li style="list-style-image: none"><i class="icon_chat_alt" style="list-style-image: none"></i>Access on Mobile and TV</li>
-									<li style="list-style-image: none"><i class="icon_document_alt" style="list-style-image: none"></i>Certificate of Completion</li>
+									<li style="list-style-image: none"><i class="icon_mobile"></i>Video Lectures</li>
+									<li style="list-style-image: none"><i class="icon_archive_alt"></i>Online Assessments</li>
+									<li style="list-style-image: none"><i class="icon_mobile"></i>Quizzes</li>
+									<li style="list-style-image: none"><i class="icon_chat_alt"></i>Access on Mobile and TV</li>
+									<li style="list-style-image: none"><i class="icon_document_alt"></i>Certificate of Completion</li>
 								</ul>
 							</div>
 						</div>
