@@ -1,0 +1,10 @@
+{"_id":{"$oid":"5aec232120f0a3234bde165f"},"name":"devops","created_at":{"$date":"2018-05-04T09:08:49.315Z"},"updated_at":{"$date":"2018-05-04T09:08:49.315Z"}}
+{"_id":{"$oid":"5aedd26f541f9d6b03cfe745"},"name":"troubleshooting","created_at":{"$date":"2018-05-05T15:49:03.052Z"},"updated_at":{"$date":"2018-05-05T15:49:03.052Z"}}
+{"_id":{"$oid":"5aef25e99e6412707a302b9d"},"name":"tutorials","created_at":{"$date":"2018-05-06T15:57:29.232Z"},"updated_at":{"$date":"2018-05-06T15:57:29.232Z"}}
+{"_id":{"$oid":"5aefc22f9e6412707a302b9e"},"name":"docker","created_at":{"$date":"2018-05-07T03:04:15.963Z"},"updated_at":{"$date":"2018-05-07T03:04:15.963Z"}}
+{"_id":{"$oid":"5aefc2459e6412707a302b9f"},"name":"chef","created_at":{"$date":"2018-05-07T03:04:37.004Z"},"updated_at":{"$date":"2018-05-07T03:04:37.005Z"}}
+{"_id":{"$oid":"5aefc24c9e6412707a302ba0"},"name":"ansible","created_at":{"$date":"2018-05-07T03:04:44.037Z"},"updated_at":{"$date":"2018-05-07T03:04:44.037Z"}}
+{"_id":{"$oid":"5aefdf08731a193d39428959"},"name":"nodejs","created_at":{"$date":"2018-05-07T05:07:20.588Z"},"updated_at":{"$date":"2018-05-07T05:07:20.588Z"}}
+{"_id":{"$oid":"5af13c44ee499420a1e04ca3"},"name":"linux","created_at":{"$date":"2018-05-08T05:57:24.486Z"},"updated_at":{"$date":"2018-05-08T05:57:24.486Z"}}
+{"_id":{"$oid":"5af3f669982f7377ad7d7d41"},"name":"career","created_at":{"$date":"2018-05-10T07:36:09.870Z"},"updated_at":{"$date":"2018-05-10T07:36:09.870Z"}}
+{"_id":{"$oid":"5af3f672982f7377ad7d7d42"},"name":"web development","created_at":{"$date":"2018-05-10T07:36:18.932Z"},"updated_at":{"$date":"2018-05-10T07:36:18.932Z"}}
