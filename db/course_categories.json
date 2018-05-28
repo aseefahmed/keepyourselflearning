@@ -1,6 +1,0 @@
-{"_id":{"$oid":"5aee977fb36d7f3f3d3370f6"},"name":"linux","image":"d028f964d72a0d0299842f8d2fd28bf1","created_at":{"$date":"2018-05-06T05:49:51.364Z"},"no_of_programs":0,"updated_at":{"$date":"2018-05-06T05:49:51.364Z"}}
-{"_id":{"$oid":"5aee989eb36d7f3f3d3370f7"},"name":"cloud computing","image":"1e345512682b82e140bbf9f351d06520","created_at":{"$date":"2018-05-06T05:54:38.553Z"},"no_of_programs":0,"updated_at":{"$date":"2018-05-06T05:54:38.553Z"}}
-{"_id":{"$oid":"5aee9a17b36d7f3f3d3370f9"},"name":"programming","image":"49b780b24a99074dc44ad8d76274aea8","created_at":{"$date":"2018-05-06T06:00:55.565Z"},"no_of_programs":0,"updated_at":{"$date":"2018-05-06T06:00:55.565Z"}}
-{"_id":{"$oid":"5aee9b1ab36d7f3f3d3370fc"},"name":"devops","image":"76b0b4aeb9fe67eb6c8741902f9f1137","created_at":{"$date":"2018-05-06T06:05:14.387Z"},"no_of_programs":0,"updated_at":{"$date":"2018-05-06T06:05:14.387Z"}}
-{"_id":{"$oid":"5aee9b85b36d7f3f3d3370fd"},"name":"business","image":"e655a4e84c0f790b25425c24f2ed80ec","created_at":{"$date":"2018-05-06T06:07:01.279Z"},"no_of_programs":0,"updated_at":{"$date":"2018-05-06T06:07:01.279Z"}}
-{"_id":{"$oid":"5aee9c73b36d7f3f3d3370fe"},"name":"software","image":"fe4b7f6db6374f2a07c5ebaa387f53cc","created_at":{"$date":"2018-05-06T06:10:59.319Z"},"no_of_programs":0,"updated_at":{"$date":"2018-05-06T06:10:59.319Z"}}
