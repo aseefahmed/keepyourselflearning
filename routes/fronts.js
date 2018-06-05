@@ -274,6 +274,8 @@ router.get('/post/get/:id', function(req, res){
 	let posts = db.get('posts');
 	
 	posts.find({_id: req.params.id}, {},function(err, post){
+
+		res.redirect('/article/'+post[0].slug);
 		let recent_posts = db.get('posts');	
 		recent_posts.find({},{limit: 5, sort: {created_at: -1}}, function(err, recents){
 			let categories = db.get('categories');

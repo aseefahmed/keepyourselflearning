@@ -94,10 +94,10 @@ router.post('/comment/delete', ensureLoggedIn, function(req, res){
 
 router.get('/post/edit/:id', ensureLoggedIn, function(req, res){
 	let posts = db.get('posts');
-	posts.find({_id: req.params.id}, {},function(err, post){
+	posts.find({slug: req.params.id}, {},function(err, post){
 		let categories = db.get('categories');
 		categories.find({},{}, function(err, categories){
-			posts.find({_id: req.params.id}, {}, function(err, post){
+			posts.find({slug: req.params.id}, {}, function(err, post){
 				let data = { 
 							pageName: 'Edit Details', 
 							parentPageName: 'Posts', 
@@ -145,6 +145,8 @@ router.post('/post/delete', ensureLoggedIn,  function(req, res){
 
 router.post('/post/update',  upload.single('post_file'), function(req, res){
 	tags = req.body.input_tags[0].toLowerCase();
+
+	var new_slug = getSlug(req.body.title); 
 	// Form Validation
 	req.checkBody('title','Title field is required').notEmpty();
 	
@@ -156,7 +158,7 @@ router.post('/post/update',  upload.single('post_file'), function(req, res){
 	  	var mainimage = req.file.filename;
 	  	var json = {
 	  		title: req.body.title,
-			slug: getSlug(req.body.title),
+			slug: new_slug,
 			category: req.body.category,
 			short_description: req.body.short_description,
 			external_link: req.body.external_link,
@@ -171,7 +173,7 @@ router.post('/post/update',  upload.single('post_file'), function(req, res){
 	  } else {
 	  	var json = {
 	  		title: req.body.title,
-			slug: getSlug(req.body.title),
+			slug: new_slug,
 			category: req.body.category,
 			short_description: req.body.short_description,
 			external_link: req.body.external_link,
@@ -187,8 +189,8 @@ router.post('/post/update',  upload.single('post_file'), function(req, res){
 		res.send('no');
 	}else{
 		var post = db.get('posts');
-		post.update({_id: req.body.post_id}, {$set: json});
-		res.redirect('/post/edit/'+req.body.post_id)
+		post.update({slug: req.body.post_id}, {$set: json});
+		res.redirect('/post/edit/'+new_slug)
 	}
 	
 });

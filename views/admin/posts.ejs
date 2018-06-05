@@ -57,9 +57,9 @@
                   <td><%= new Date(posts[i].created_at).toDateString() %></td>
                   <td><%= new Date(posts[i].updated_at).toDateString() %></td>
                   <td class="text-center">
-                      <a href="/post/get/<%= posts[i]._id %>" target="_blank" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                      <a href="/post/edit/<%= posts[i]._id %>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                      <a href="#" class="delete_post_btn btn btn-danger" post_id="<%= posts[i]._id %>"><i class="fa fa-trash"></i></a>
+                      <a href="/article/<%= posts[i].slug %>" target="_blank" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                      <a href="/post/edit/<%= posts[i].slug %>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                      <a href="#" class="delete_post_btn btn btn-danger" postslug="<%= posts[i].slug %>"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
                 <% } %>
@@ -88,7 +88,7 @@
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal" style="cursor: pointer">Cancel</button>
             <form method="POST" action="post/delete">
-              <input type="hidden" id="deletable_post_id" name="deletable_post_id"/>
+              <input type="hidden" id="deletable_postslug" name="deletable_postslug"/>
               <input type="submit" class="btn btn-primary" value="Agree" style="cursor: pointer" >
             </form>
           </div>
