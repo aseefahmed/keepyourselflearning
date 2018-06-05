@@ -4,6 +4,7 @@ var db = require('monk')('localhost/lms');
 var flash = require('connect-flash');
 var multer = require('multer');
 var upload = multer({ dest: './public/img/uploads' })
+var getSlug = require('speakingurl');
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 
 router.use(flash());
@@ -155,6 +156,7 @@ router.post('/post/update',  upload.single('post_file'), function(req, res){
 	  	var mainimage = req.file.filename;
 	  	var json = {
 	  		title: req.body.title,
+			slug: getSlug(req.body.title),
 			category: req.body.category,
 			short_description: req.body.short_description,
 			external_link: req.body.external_link,
@@ -169,6 +171,7 @@ router.post('/post/update',  upload.single('post_file'), function(req, res){
 	  } else {
 	  	var json = {
 	  		title: req.body.title,
+			slug: getSlug(req.body.title),
 			category: req.body.category,
 			short_description: req.body.short_description,
 			external_link: req.body.external_link,
@@ -211,6 +214,7 @@ router.post('/post/submit', upload.single('post_file'), function(req, res){
 		var posts = db.get('posts');
 		posts.insert({
 			title: req.body.title,
+			slug: getSlug(req.body.title),
 			category: req.body.category,
 			short_description: req.body.short_description,
 			external_link: req.body.external_link,

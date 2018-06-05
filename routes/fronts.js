@@ -304,6 +304,40 @@ router.get('/post/get/:id', function(req, res){
 	
 });
 
+router.get('/article/:id', function(req, res){
+	let posts = db.get('posts');
+	
+	posts.find({slug: req.params.id}, {},function(err, post){
+		let recent_posts = db.get('posts');	
+		recent_posts.find({},{limit: 5, sort: {created_at: -1}}, function(err, recents){
+			let categories = db.get('categories');
+			categories.find({}, {}, function(err, categories){
+				if(typeof post[0].no_of_views != "number"){
+					views = 0;
+				}else {
+					views = post[0].no_of_views;
+				}
+				posts.update({slug: req.params.id}, {$set: {no_of_views: views+1}});
+				let popular_posts = db.get('posts');
+				popular_posts.find({},{limit: 5, sort: {no_of_views: -1}},function(err, pop_posts){
+					let data = {
+							pageName: 'Details', 
+							parentPageName: 'Blog', 
+							ParentPageRoute: '/blog', 
+							details: post, 
+							recents: recents,
+							popular_posts: pop_posts,
+							categories: categories
+						};
+						res.render('frontend/post_details', data);
+				});
+			})
+		})
+		
+	});
+	
+});
+
 router.get('/courses/:category?', function(req, res){
 	if(typeof req.params.category == 'undefined'){
 		var filter = {}

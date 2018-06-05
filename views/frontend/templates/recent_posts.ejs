@@ -14,10 +14,10 @@
 		<% recents.forEach(function(recent){ %>
 				<li style="list-style-image: none">
 					<div class="alignleft">
-						<a title="<%= recent.title %>" target="_blank" href="<% if(typeof recent.external_link == 'undefined' || recent.external_link == ""){%>/post/get/<%= recent._id %><%}else{%><%= recent.external_link %><%} %>"><img src="/img/uploads/<%= recent.image %>" alt="<%= recent.title %>"></a>
+						<a title="<%= recent.title %>" target="_blank" href="<% if(typeof recent.external_link == 'undefined' || recent.external_link == ""){%>/article/<%= recent.slug %><%}else{%><%= recent.external_link %><%} %>"><img src="/img/uploads/<%= recent.image %>" alt="<%= recent.title %>"></a>
 					</div>
 					<small><%= new Date(recent.created_at).toDateString() %></small>
-					<h3><a title="<%= recent.title %>" target="_blank" href="<% if(typeof recent.external_link == 'undefined' || recent.external_link == ""){%>/post/get/<%= recent._id %><%}else{%><%= recent.external_link %><%} %>"><%= recent.title %></a></h3>
+					<h3><a title="<%= recent.title %>" target="_blank" href="<% if(typeof recent.external_link == 'undefined' || recent.external_link == ""){%>/article/<%= recent.slug %><%}else{%><%= recent.external_link %><%} %>"><%= recent.title %></a></h3>
 				</li>
 		<% }) %>
 		
@@ -31,10 +31,10 @@
 		<% popular_posts.forEach(function(pop){ %>
 				<li style="list-style-image: none">
 					<div class="alignleft">
-						<a href="/post/get/<%= pop._id %>" title="<%= pop.title %>"><img src="/img/uploads/<%= pop.image %>" alt="<%= pop.title %>"></a>
+						<a href="/article/<%= pop.slug %>" title="<%= pop.title %>"><img src="/img/uploads/<%= pop.image %>" alt="<%= pop.title %>"></a>
 					</div>
 					<small><%= new Date(pop.created_at).toDateString() %></small>
-					<h3><a href="/post/get/<%= pop._id %>" title="<%= pop.title %>"><%= pop.title %></a></h3>
+					<h3><a href="/article/<%= pop.slug %>" title="<%= pop.title %>"><%= pop.title %></a></h3>
 				</li>
 		<% }) %>
 		
