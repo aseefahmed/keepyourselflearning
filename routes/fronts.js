@@ -43,6 +43,7 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 
+/*
 router.get('/', function(req, res){
 	
 	let course_categories = db.get('course_categories');
@@ -68,6 +69,7 @@ router.get('/', function(req, res){
 	})
 	
 });
+*/
 
 router.get('/public', function(req, res){
 	res.send('done')
@@ -78,6 +80,58 @@ router.get('/private', function(req, res){
 })
 
 router.get('/blog/:page?', function(req, res){
+
+	let limit_data = 10;
+	if(typeof req.params.page == 'undefined'){
+		var page = 1;
+		var offset_data = 0;
+	}else{
+		var offset_data = (req.params.page-1)*limit_data;
+		var page = req.params.page;
+	}
+
+	let option = {
+		limit:limit_data,
+		skip: offset_data,
+		sort: {created_at: -1}
+	}
+
+	let posts = db.get('posts');
+		
+	posts.find({}, option, function(err, posts){
+		let recent_posts = db.get('posts');
+		recent_posts.find({},{limit: 5, sort: {created_at: -1}}, function(err, recents){
+
+			let categories = db.get('categories');
+			categories.find({}, {}, function(err, categories){
+				let popular_posts = db.get('posts');
+				popular_posts.find({},{limit: 5, sort: {no_of_views: -1}},function(err, pop_posts){
+					let post_count = db.get('posts');
+					post_count.count({}, function(err,post_count){
+						let data = {
+							pageName: 'Blog', 
+							posts: posts, 
+							recents: recents,
+							recents: recents,
+							popular_posts: pop_posts,
+							categories: categories,
+							page_number: page,
+							post_count: Math.ceil(post_count/limit_data)
+						};
+						res.render('frontend/blog', data);
+					})
+				});
+			})
+
+
+		})
+		
+	})
+	
+});
+
+
+router.get('/', function(req, res){
 
 	let limit_data = 10;
 	if(typeof req.params.page == 'undefined'){
